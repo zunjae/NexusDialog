@@ -1,10 +1,5 @@
 package com.github.dkharrat.nexusdialog.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -26,10 +21,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.R;
 import com.github.dkharrat.nexusdialog.utils.MessageUtil;
 import com.github.dkharrat.nexusdialog.validations.InputValidator;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 
 /**
  * Represents a field that allows a user to select from a list of items, with the ability to search for specific items.
@@ -43,7 +42,7 @@ import com.github.dkharrat.nexusdialog.validations.InputValidator;
  * can be represented by returning {@code null} for the value of the field.
  */
 public class SearchableSelectionController extends LabeledFieldController {
-    private final int editTextId = FormController.generateViewId();
+    private final int editTextId = View.generateViewId();
 
     private final String placeholder;
     private boolean isFreeFormTextAllowed = true;
@@ -53,19 +52,6 @@ public class SearchableSelectionController extends LabeledFieldController {
     private final LoadItemsTask loadItemsTask;
     private ProgressDialog loadingIndicator;
     private boolean otherSelectionIsShowing = false;
-
-    /**
-     * An interface that provides the list of items to display for the {@link SearchableSelectionController}.
-     */
-    public static interface SelectionDataSource {
-        /**
-         * Returns a list of all the items that can be selected or searched. This method will be called by the
-         * {@link SearchableSelectionController} in a background thread.
-         *
-         * @return a list of all the items that can be selected or searched.
-         */
-        List<String> getItems();
-    }
 
     /**
      * Creates a new instance of a selection field.
@@ -83,7 +69,7 @@ public class SearchableSelectionController extends LabeledFieldController {
         this.dataSource = dataSource;
 
         loadItemsTask = new LoadItemsTask();
-        loadItemsTask.execute(new Void[0]);
+        loadItemsTask.execute();
     }
 
     /**
@@ -102,46 +88,7 @@ public class SearchableSelectionController extends LabeledFieldController {
         this.dataSource = dataSource;
 
         loadItemsTask = new LoadItemsTask();
-        loadItemsTask.execute(new Void[0]);
-    }
-
-
-    public void setFreeFormTextAllowed(boolean allowed) {
-        isFreeFormTextAllowed = allowed;
-    }
-
-    public boolean isFreeFormTextAllowed() {
-        return isFreeFormTextAllowed;
-    }
-
-    protected View createFieldView() {
-        final EditText editText = new EditText(getContext());
-        editText.setId(editTextId);
-
-        editText.setSingleLine(true);
-        editText.setInputType(InputType.TYPE_CLASS_TEXT);
-        editText.setKeyListener(null);
-        if (placeholder != null) {
-            editText.setHint(placeholder);
-        }
-        refresh(editText);
-        editText.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showSelectionDialog(getContext(), editText);
-            }
-        });
-
-        editText.setOnFocusChangeListener(new OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    showSelectionDialog(getContext(), editText);
-                }
-            }
-        });
-
-        return editText;
+        loadItemsTask.execute();
     }
 
     private void showSelectionDialog(final Context context, final EditText editText) {
@@ -232,7 +179,7 @@ public class SearchableSelectionController extends LabeledFieldController {
             });
 
             builder.setView(searchableList);
-            builder.setInverseBackgroundForced(true);
+            //builder.setInverseBackgroundForced(true);
             selectionDialog = builder.create();
             selectionDialog.setOnDismissListener(new OnDismissListener() {
 
@@ -246,12 +193,64 @@ public class SearchableSelectionController extends LabeledFieldController {
         }
     }
 
+
+    public void setFreeFormTextAllowed(boolean allowed) {
+        isFreeFormTextAllowed = allowed;
+    }
+
+    public boolean isFreeFormTextAllowed() {
+        return isFreeFormTextAllowed;
+    }
+
+    protected View createFieldView() {
+        final EditText editText = new EditText(getContext());
+        editText.setId(editTextId);
+
+        editText.setSingleLine(true);
+        editText.setInputType(InputType.TYPE_CLASS_TEXT);
+        editText.setKeyListener(null);
+        if (placeholder != null) {
+            editText.setHint(placeholder);
+        }
+        refresh(editText);
+        editText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSelectionDialog(getContext(), editText);
+            }
+        });
+
+        editText.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    showSelectionDialog(getContext(), editText);
+                }
+            }
+        });
+
+        return editText;
+    }
+
+    /**
+     * An interface that provides the list of items to display for the {@link SearchableSelectionController}.
+     */
+    public interface SelectionDataSource {
+        /**
+         * Returns a list of all the items that can be selected or searched. This method will be called by the
+         * {@link SearchableSelectionController} in a background thread.
+         *
+         * @return a list of all the items that can be selected or searched.
+         */
+        List<String> getItems();
+    }
+
     private EditText getEditText() {
-        return (EditText)getView().findViewById(editTextId);
+        return (EditText) getView().findViewById(editTextId);
     }
 
     private void refresh(EditText editText) {
-        String value = (String)getModel().getValue(getName());
+        String value = (String) getModel().getValue(getName());
         editText.setText(value != null ? value : "");
     }
 

@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.validations.InputValidator;
 
 import java.text.SimpleDateFormat;
@@ -19,7 +18,7 @@ import java.util.Set;
 import java.util.TimeZone;
 
 public class TimePickerController extends LabeledFieldController {
-    private final int editTextId = FormController.generateViewId();
+    private final int editTextId = View.generateViewId();
 
     private TimePickerDialog timePickerDialog = null;
     private final SimpleDateFormat displayFormat;

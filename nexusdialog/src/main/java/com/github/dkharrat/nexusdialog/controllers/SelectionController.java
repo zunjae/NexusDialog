@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.validations.InputValidator;
 
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ import java.util.Set;
  */
 public class SelectionController extends LabeledFieldController {
 
-    private final int spinnerId = FormController.generateViewId();
+    private final int spinnerId = View.generateViewId();
 
     private final String prompt;
     private final List<String> items;

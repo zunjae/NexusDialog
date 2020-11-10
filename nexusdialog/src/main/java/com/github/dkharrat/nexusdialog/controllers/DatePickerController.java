@@ -1,12 +1,5 @@
 package com.github.dkharrat.nexusdialog.controllers;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Set;
-import java.util.TimeZone;
-
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
@@ -19,8 +12,14 @@ import android.view.View.OnFocusChangeListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.validations.InputValidator;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Set;
+import java.util.TimeZone;
 
 /**
  * Represents a field that allows selecting a specific date via a date picker.
@@ -29,7 +28,7 @@ import com.github.dkharrat.nexusdialog.validations.InputValidator;
  * represented by returning {@code null} for the value of the field.
  */
 public class DatePickerController extends LabeledFieldController {
-    private final int editTextId = FormController.generateViewId();
+    private final int editTextId = View.generateViewId();
 
     private DatePickerDialog datePickerDialog = null;
     private final SimpleDateFormat displayFormat;

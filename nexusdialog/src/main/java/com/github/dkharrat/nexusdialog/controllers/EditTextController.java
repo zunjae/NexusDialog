@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
-import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.validations.InputValidator;
 
 import java.util.Set;
@@ -16,7 +15,7 @@ import java.util.Set;
  * Represents a field that allows free-form text.
  */
 public class EditTextController extends LabeledFieldController {
-    private final int editTextId = FormController.generateViewId();
+    private final int editTextId = View.generateViewId();
 
     private int inputType;
     private final String placeholder;
