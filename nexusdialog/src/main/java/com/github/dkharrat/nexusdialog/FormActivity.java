@@ -1,9 +1,10 @@
 package com.github.dkharrat.nexusdialog;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
+import androidx.fragment.app.FragmentActivity;
 
 /**
  * <code>FormActivity</code> is provides a default Activity implementation for using NexusDialog. It provides simple APIs to quickly

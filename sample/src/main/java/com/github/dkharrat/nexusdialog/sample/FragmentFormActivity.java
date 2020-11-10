@@ -2,11 +2,12 @@ package com.github.dkharrat.nexusdialog.sample;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.FormFragment;
@@ -32,7 +33,7 @@ public class FragmentFormActivity extends FragmentActivity {
         MyFormFragment formFragment;
 
         Fragment retainedFragment = fm.findFragmentByTag(FORM_FRAGMENT_KEY);
-        if (retainedFragment != null && retainedFragment instanceof MyFormFragment) {
+        if (retainedFragment instanceof MyFormFragment) {
             formFragment = (MyFormFragment) retainedFragment;
         } else {
             formFragment = new MyFormFragment();

@@ -1,9 +1,10 @@
 package com.github.dkharrat.nexusdialog;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * <code>FormWithAppCompatActivity</code> is provides a default Activity implementation for using NexusDialog. It also handles retaining

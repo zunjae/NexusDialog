@@ -1,3 +1,5 @@
+**Forked cause outdated shit**
+
 NexusDialog
 ===========
 **Simple Form Generator for Android**
@@ -12,9 +14,6 @@ NexusDialog 1.0.0 will be the first stable release.
 
 A Simple Example
 ----------------
-To give you an idea of the simplicity of NexusDialog, here's a screenshot of a simple example:
-
-![screenshot](http://dkharrat.github.io/NexusDialog/images/screenshot01.png "NexusDialog Screenshot")
 
 Here's the code for that example (less than 7 lines of real code!):
 
@@ -36,7 +35,6 @@ Here's the code for that example (less than 7 lines of real code!):
         }
     }
 
-For more examples, browse the [sample](http://github.com/dkharrat/NexusDialog/tree/master/sample) directory.
 
 Features
 --------
@@ -54,44 +52,6 @@ the following form elements are supported:
 * `SearchableSelectionController`: Displays a (typically large) list of items to select from, with the ability to
     search the list and also allow free-form text.
 
-Apps Using NexusDialog
-----------------------
-Do you have an app that's utilizing NexusDialog? [Let me know](mailto:dkharrat@gmail.com) and I'll add a link to it here!
-
-How to Add NexusDialog to Your Project
---------------------------------------
-There are multiple ways to include your project, depending on your build environment:
-
-#### Gradle
-
-Add the following dependency to your build.gradle file for your project:
-
-    dependencies {
-      compile 'com.github.dkharrat.nexusdialog:nexusdialog:0.4.2'
-    }
-
-Make sure your application is using the Android SDK v23 or later in your build.gradle file:
-
-    android {
-        compileSdkVersion 23
-        buildToolsVersion "23"
-        ...
-    }
-
-#### Maven
-
-Add the following dependency to your pom.xml file for your project (requires android-maven-plugin 3.8.0+):
-
-    <dependency>
-        <groupId>com.github.dkharrat.nexusdialog</groupId>
-        <artifactId>nexusdialog</artifactId>
-        <version>0.4.2</version>
-        <type>aar</type>
-    </dependency>
-
-#### Android Studio or IntelliJ 13+
-
-Add the appropriate dependency in your build.gradle file and refresh your project.
 
 How to Use NexusDialog
 ----------------------
@@ -166,9 +126,6 @@ Documentation
 -------------
 See the current [Javadoc](http://dkharrat.github.io/NexusDialog/javadoc/).
 
-Styling
--------
-TODO
 
 Adding Custom Elements
 ----------------------
@@ -187,13 +144,6 @@ Typically your custom element falls under one of these cases:
 Browse through the _catalog_ sample for an example of implementing a custom element, or go over the code for the
 built-in form elements to get an idea how they work.
 
-Planned Features
-----------------
-The framework is constantly being improved and new features are being implemented. The following improvements are
-planned:
-
-* Support buttons
-* Support sliders
 
 Contributing
 ------------
