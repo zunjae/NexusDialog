@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
-import android.os.AsyncTask.Status;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -93,7 +92,6 @@ public class SearchableSelectionController extends LabeledFieldController {
 
     private void showSelectionDialog(final Context context, final EditText editText) {
         if (items == null) {
-            assert(loadItemsTask.getStatus() != Status.FINISHED);
             loadItemsTask.runTaskOnFinished(new Runnable() {
                 @Override
                 public void run() {
