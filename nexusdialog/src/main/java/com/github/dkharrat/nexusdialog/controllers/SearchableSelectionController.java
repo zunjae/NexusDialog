@@ -2,7 +2,6 @@ package com.github.dkharrat.nexusdialog.controllers;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -21,7 +20,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.github.dkharrat.nexusdialog.R;
-import com.github.dkharrat.nexusdialog.utils.MessageUtil;
 import com.github.dkharrat.nexusdialog.validations.InputValidator;
 
 import java.util.ArrayList;
@@ -49,18 +47,17 @@ public class SearchableSelectionController extends LabeledFieldController {
     private final SelectionDataSource dataSource;
     private List<String> items = null;
     private final LoadItemsTask loadItemsTask;
-    private ProgressDialog loadingIndicator;
     private boolean otherSelectionIsShowing = false;
 
     /**
      * Creates a new instance of a selection field.
      *
-     * @param ctx           the Android context
-     * @param name          the name of the field
-     * @param labelText     the label to display beside the field. Set to {@code null} to not show a label.
-     * @param isRequired    indicates if the field is required or not
-     * @param placeholder   a placeholder text to show when the input field is empty
-     * @param dataSource    the data source that provides the list of items to display
+     * @param ctx         the Android context
+     * @param name        the name of the field
+     * @param labelText   the label to display beside the field. Set to {@code null} to not show a label.
+     * @param isRequired  indicates if the field is required or not
+     * @param placeholder a placeholder text to show when the input field is empty
+     * @param dataSource  the data source that provides the list of items to display
      */
     public SearchableSelectionController(Context ctx, String name, String labelText, boolean isRequired, String placeholder, SelectionDataSource dataSource) {
         super(ctx, name, labelText, isRequired);
@@ -74,12 +71,12 @@ public class SearchableSelectionController extends LabeledFieldController {
     /**
      * Creates a new instance of a selection field.
      *
-     * @param ctx           the Android context
-     * @param name          the name of the field
-     * @param labelText     the label to display beside the field. Set to {@code null} to not show a label.
-     * @param validators    contains the validations to process on the field
-     * @param placeholder   a placeholder text to show when the input field is empty
-     * @param dataSource    the data source that provides the list of items to display
+     * @param ctx         the Android context
+     * @param name        the name of the field
+     * @param labelText   the label to display beside the field. Set to {@code null} to not show a label.
+     * @param validators  contains the validations to process on the field
+     * @param placeholder a placeholder text to show when the input field is empty
+     * @param dataSource  the data source that provides the list of items to display
      */
     public SearchableSelectionController(Context ctx, String name, String labelText, Set<InputValidator> validators, String placeholder, SelectionDataSource dataSource) {
         super(ctx, name, labelText, validators);
@@ -98,29 +95,15 @@ public class SearchableSelectionController extends LabeledFieldController {
                     showSelectionDialog(context, editText);
                 }
             });
-
-            if (loadingIndicator == null) {
-                loadingIndicator = MessageUtil.newProgressIndicator("Getting required data", context);
-                loadingIndicator.setOnDismissListener(new OnDismissListener() {
-
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-                        loadItemsTask.runTaskOnFinished(null);
-                    }
-                });
-            }
-
-            loadingIndicator.show();
-        }
-        else if (selectionDialog == null) {
+        } else if (selectionDialog == null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Select " + getLabel());
+            builder.setTitle(getLabel());
 
-            View searchableList = LayoutInflater.from(context).inflate(R.layout.searchable_listview, null);
+            View rootView = LayoutInflater.from(context).inflate(R.layout.searchable_listview, null);
             final List<String> filteredItems = new ArrayList<String>(items);
             final ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, android.R.id.text1, filteredItems);
 
-            final EditText searchField = (EditText)searchableList.findViewById(R.id.search_field);
+            final EditText searchField = (EditText) rootView.findViewById(R.id.search_field);
             searchField.addTextChangedListener(new TextWatcher() {
 
                 @Override
@@ -158,7 +141,7 @@ public class SearchableSelectionController extends LabeledFieldController {
                 }
             });
 
-            final ListView listView = (ListView)searchableList.findViewById(R.id.selection_list);
+            final ListView listView = (ListView) rootView.findViewById(R.id.selection_list);
             listView.setAdapter(itemsAdapter);
             listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -176,7 +159,7 @@ public class SearchableSelectionController extends LabeledFieldController {
                 }
             });
 
-            builder.setView(searchableList);
+            builder.setView(rootView);
             //builder.setInverseBackgroundForced(true);
             selectionDialog = builder.create();
             selectionDialog.setOnDismissListener(new OnDismissListener() {
@@ -268,11 +251,6 @@ public class SearchableSelectionController extends LabeledFieldController {
 
         @Override
         protected void onPostExecute(List<String> results) {
-            if (loadingIndicator != null) {
-                loadingIndicator.dismiss();
-                loadingIndicator = null;
-            }
-
             items = results;
 
             if (doneRunnable != null) {
