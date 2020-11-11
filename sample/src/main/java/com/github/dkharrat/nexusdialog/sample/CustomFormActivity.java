@@ -44,7 +44,7 @@ public class CustomFormActivity extends Activity {
 
         formController.addSection(section);
 
-        ViewGroup containerView = (ViewGroup)findViewById(R.id.form_elements_container);
+        ViewGroup containerView = findViewById(R.id.form_elements_container);
         formController.recreateViews(containerView);
     }
 }
