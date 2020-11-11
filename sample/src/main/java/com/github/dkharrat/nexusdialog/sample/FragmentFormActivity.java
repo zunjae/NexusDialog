@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentManager;
 
 import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.FormFragment;
-import com.github.dkharrat.nexusdialog.controllers.CheckBoxController;
 import com.github.dkharrat.nexusdialog.controllers.EditTextController;
 import com.github.dkharrat.nexusdialog.controllers.FormSectionController;
 import com.github.dkharrat.nexusdialog.controllers.SelectionController;
@@ -45,7 +44,7 @@ public class FragmentFormActivity extends FragmentActivity {
     }
 
     private void setSubmitAction(final MyFormFragment formFragment) {
-        Button submitButton = (Button) findViewById(R.id.submit_button);
+        Button submitButton = findViewById(R.id.submit_button);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +85,6 @@ public class FragmentFormActivity extends FragmentActivity {
             section.addElement(new EditTextController(ctxt, FIRST_NAME, "First name"));
             section.addElement(new EditTextController(ctxt, LAST_NAME, "Last name"));
             section.addElement(new SelectionController(ctxt, GENDER, "Gender", true, "Select", Arrays.asList("Male", "Female"), true));
-            section.addElement(new CheckBoxController(ctxt, HOBBIES, "You like", true, Arrays.asList("sport", "gaming", "relaxation", "development"), true));
 
             HashSet<String> checkedBoxes = new HashSet<String>();
             checkedBoxes.add("gaming");

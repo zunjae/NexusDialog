@@ -1,19 +1,26 @@
 package com.github.dkharrat.nexusdialog.sample;
 
 import android.text.InputType;
-import android.view.*;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
 
 import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.FormWithAppCompatActivity;
-import com.github.dkharrat.nexusdialog.controllers.*;
-import com.github.dkharrat.nexusdialog.controllers.SearchableSelectionController.SelectionDataSource;
+import com.github.dkharrat.nexusdialog.controllers.EditTextController;
+import com.github.dkharrat.nexusdialog.controllers.FormSectionController;
+import com.github.dkharrat.nexusdialog.controllers.SelectionController;
+import com.github.dkharrat.nexusdialog.controllers.ValueController;
 import com.github.dkharrat.nexusdialog.utils.MessageUtil;
 import com.github.dkharrat.nexusdialog.validations.InputValidator;
 import com.github.dkharrat.nexusdialog.validations.RequiredFieldValidator;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Stack;
 
 /**
  * Demonstrates the following functionality:
@@ -46,7 +53,6 @@ public class ComplexForm extends FormWithAppCompatActivity {
         section.addElement(new EditTextController(this, LAST_NAME, "Last name"));
         section.addElement(new ValueController(this, FULL_NAME, "Full name"));
         section.addElement(new SelectionController(this, GENDER, "Gender", true, "Select", Arrays.asList("Male", "Female"), true));
-        section.addElement(new SearchableSelectionController(this, FAVORITE_COLOR, "Favorite Color", false, "Blue", dataSource));
 
         CustomElement customElem = new CustomElement(this, CUSTOM_ELEM, "Custom Element");
         customElem.getAddButton().setOnClickListener(new View.OnClickListener() {
@@ -97,18 +103,6 @@ public class ComplexForm extends FormWithAppCompatActivity {
         // initialize field with a value
         formController.getModel().setValue(LAST_NAME, "Smith");
     }
-
-    private final SelectionDataSource dataSource = new SelectionDataSource() {
-        @Override public List<String> getItems() {
-            return Arrays.asList(
-                    "Red",
-                    "Blue",
-                    "Green",
-                    "Purple",
-                    "Pink"
-            );
-        }
-    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
