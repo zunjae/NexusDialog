@@ -83,7 +83,7 @@ public class FormController {
      */
     public FormSectionController getSection(String name) {
         for (FormSectionController section : getSections()) {
-            if (section.getName().equals(name)) {
+            if (section.getFieldIdentifier().equals(name)) {
                 return section;
             }
         }

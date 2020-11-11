@@ -30,29 +30,29 @@ public abstract class LabeledFieldController extends FormElementController {
     /**
      * Creates a labeled field.
      *
-     * @param ctx           the Android context
-     * @param name          the name of the field
-     * @param labelText     the label to display beside the field. If null, no label is displayed and the field will
-     *                      occupy the entire length of the row.
-     * @param isRequired    indicates whether this field is required. If true, this field checks for a non-empty or
-     *                      non-null value upon validation. Otherwise, this field can be empty.
+     * @param ctx             the Android context
+     * @param fieldIdentifier the fieldIdentifier of the field
+     * @param labelText       the label to display beside the field. If null, no label is displayed and the field will
+     *                        occupy the entire length of the row.
+     * @param isRequired      indicates whether this field is required. If true, this field checks for a non-empty or
+     *                        non-null value upon validation. Otherwise, this field can be empty.
      */
-    public LabeledFieldController(Context ctx, String name, String labelText, boolean isRequired) {
-        this(ctx, name, labelText, new HashSet<InputValidator>());
+    public LabeledFieldController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired) {
+        this(ctx, fieldIdentifier, labelText, new HashSet<>());
         setIsRequired(isRequired);
     }
 
     /**
      * Creates a labeled field.
      *
-     * @param ctx           the Android context
-     * @param name          the name of the field
-     * @param labelText     the label to display beside the field. If null, no label is displayed and the field will
-     *                      occupy the entire length of the row.
-     * @param validators    The list of input validations to add to the field.
+     * @param ctx             the Android context
+     * @param fieldIdentifier the fieldIdentifier of the field
+     * @param labelText       the label to display beside the field. If null, no label is displayed and the field will
+     *                        occupy the entire length of the row.
+     * @param validators      The list of input validations to add to the field.
      */
-    public LabeledFieldController(Context ctx, String name, String labelText, Set<InputValidator> validators) {
-        super(ctx, name);
+    public LabeledFieldController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators) {
+        super(ctx, fieldIdentifier);
         this.labelText = labelText;
         this.validators = validators;
     }
@@ -115,10 +115,10 @@ public abstract class LabeledFieldController extends FormElementController {
      */
     public List<ValidationError> validateInput() {
         List<ValidationError> errors = new ArrayList<>();
-        Object value = getModel().getValue(getName());
+        Object value = getModel().getValue(getFieldIdentifier());
         ValidationError error;
         for (InputValidator validator : validators) {
-            error = validator.validate(value, getName(), getLabel());
+            error = validator.validate(value, getFieldIdentifier(), getLabel());
             if (error != null){
                 errors.add(error);
             }
@@ -149,16 +149,16 @@ public abstract class LabeledFieldController extends FormElementController {
     protected View createView() {
         LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.form_labeled_element, null);
-        errorView = (TextView) view.findViewById(R.id.field_error);
+        errorView = view.findViewById(R.id.field_error);
 
-        TextView label = (TextView)view.findViewById(R.id.field_label);
+        TextView label = view.findViewById(R.id.field_label);
         if (labelText == null) {
             label.setVisibility(View.GONE);
         } else {
             label.setText(labelText);
         }
 
-        FrameLayout container = (FrameLayout)view.findViewById(R.id.field_container);
+        FrameLayout container = view.findViewById(R.id.field_container);
         container.addView(getFieldView());
 
         return view;

@@ -30,7 +30,7 @@ public class CheckBoxController extends LabeledFieldController {
      * Constructs a new instance of a checkboxes field.
      *
      * @param ctx              the Android context
-     * @param name             the name of the field
+     * @param fieldIdentifier  the fieldIdentifier of the field
      * @param labelText        the label to display beside the field. Set to {@code null} to not show a label
      * @param validators       contains the validations to process on the field
      * @param items            a list of Strings defining the selection items to show
@@ -39,27 +39,27 @@ public class CheckBoxController extends LabeledFieldController {
      *                         {@code CheckBoxController} expects the form model to use index (as an Integer) to
      *                         represent the selected item
      */
-    public CheckBoxController(Context ctx, String name, String labelText, Set<InputValidator> validators, List<String> items, boolean useItemsAsValues) {
-        this(ctx, name, labelText, validators, items, useItemsAsValues ? items : null);
+    public CheckBoxController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators, List<String> items, boolean useItemsAsValues) {
+        this(ctx, fieldIdentifier, labelText, validators, items, useItemsAsValues ? items : null);
     }
 
     /**
      * Constructs a new instance of a checkboxes field.
      *
      * @param ctx        the Android context
-     * @param name       the name of the field
+     * @param fieldIdentifier       the fieldIdentifier of the field
      * @param labelText  the label to display beside the field
      * @param validators contains the validations to process on the field
      * @param items      a list of Strings defining the selection items to show
      * @param values     a list of Objects representing the values to set the form model on a selection (in
      *                   the same order as the {@code items}.
      */
-    public CheckBoxController(Context ctx, String name, String labelText, Set<InputValidator> validators, List<String> items, List<?> values) {
-        super(ctx, name, labelText, validators);
+    public CheckBoxController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators, List<String> items, List<?> values) {
+        super(ctx, fieldIdentifier, labelText, validators);
         this.items = items;
         this.values = values;
 
-        if(values != null && items.size() != values.size()) {
+        if (values != null && items.size() != values.size()) {
             throw new IllegalArgumentException("Size of Values and Items must be equal.");
         }
     }
@@ -69,7 +69,7 @@ public class CheckBoxController extends LabeledFieldController {
      * Constructs a new instance of a checkboxes field.
      *
      * @param ctx              the Android context
-     * @param name             the name of the field
+     * @param fieldIdentifier             the fieldIdentifier of the field
      * @param labelText        the label to display beside the field. Set to {@code null} to not show a label
      * @param isRequired       indicates if the field is required or not
      * @param items            a list of Strings defining the selection items to show
@@ -78,27 +78,27 @@ public class CheckBoxController extends LabeledFieldController {
      *                         {@code CheckBoxController} expects the form model to use index (as an Integer) to
      *                         represent the selected item
      */
-    public CheckBoxController(Context ctx, String name, String labelText, boolean isRequired, List<String> items, boolean useItemsAsValues) {
-        this(ctx, name, labelText, isRequired, items, useItemsAsValues ? items : null);
+    public CheckBoxController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired, List<String> items, boolean useItemsAsValues) {
+        this(ctx, fieldIdentifier, labelText, isRequired, items, useItemsAsValues ? items : null);
     }
 
     /**
      * Constructs a new instance of a checkboxes field.
      *
      * @param ctx        the Android context
-     * @param name       the name of the field
+     * @param fieldIdentifier       the fieldIdentifier of the field
      * @param labelText  the label to display beside the field
      * @param isRequired indicates if the field is required or not
      * @param items      a list of Strings defining the selection items to show
      * @param values     a list of Objects representing the values to set the form model on a selection (in
      *                   the same order as the {@code items}.
      */
-    public CheckBoxController(Context ctx, String name, String labelText, boolean isRequired, List<String> items, List<?> values) {
-        super(ctx, name, labelText, isRequired);
+    public CheckBoxController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired, List<String> items, List<?> values) {
+        super(ctx, fieldIdentifier, labelText, isRequired);
         this.items = items;
         this.values = values;
 
-        if(values != null && items.size() != values.size()) {
+        if (values != null && items.size() != values.size()) {
             throw new IllegalArgumentException("Size of Values and Items must be equal.");
         }
     }
@@ -125,7 +125,7 @@ public class CheckBoxController extends LabeledFieldController {
                     } else {
                         modelValues.remove(value);
                     }
-                    getModel().setValue(getName(), modelValues);
+                    getModel().setValue(getFieldIdentifier(), modelValues);
                 }
             });
 
@@ -151,7 +151,7 @@ public class CheckBoxController extends LabeledFieldController {
         CheckBox checkbox;
         int nbItem = items.size();
         for (int index = 0; index < nbItem; index++) {
-            checkbox = (CheckBox) layout.findViewById(CHECKBOX_ID + index);
+            checkbox = layout.findViewById(CHECKBOX_ID + index);
             refresh(checkbox, index);
         }
     }
@@ -171,7 +171,7 @@ public class CheckBoxController extends LabeledFieldController {
      * @return The values from the model.
      */
     private Set<Object> retrieveModelValues() {
-        Set<Object> modelValues = (Set<Object>) getModel().getValue(getName());
+        Set<Object> modelValues = (Set<Object>) getModel().getValue(getFieldIdentifier());
         if (modelValues == null) {
             modelValues = new HashSet<>();
         }

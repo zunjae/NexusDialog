@@ -9,19 +9,19 @@ import android.view.View;
  */
 public abstract class FormElementController {
     private final Context context;
-    private final String name;
+    private final String fieldIdentifier;
     private FormModel model;
     private View view;
 
     /**
-     * Constructs a new instance with the specified name.
+     * Constructs a new instance with the specified fieldIdentifier.
      *
-     * @param ctx   the Android context
-     * @param name  the name of this instance
+     * @param ctx             the Android context
+     * @param fieldIdentifier the fieldIdentifier of this instance
      */
-    protected FormElementController(Context ctx, String name) {
+    protected FormElementController(Context ctx, String fieldIdentifier) {
         this.context = ctx;
-        this.name = name;
+        this.fieldIdentifier = fieldIdentifier;
     }
 
     /**
@@ -36,10 +36,10 @@ public abstract class FormElementController {
     /**
      * Returns the name of this form element.
      *
-     * @return  the name of the element
+     * @return the name of the element
      */
-    public String getName() {
-        return name;
+    public String getFieldIdentifier() {
+        return fieldIdentifier;
     }
 
     void setModel(FormModel model) {

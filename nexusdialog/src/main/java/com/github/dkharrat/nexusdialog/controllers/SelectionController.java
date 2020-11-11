@@ -35,26 +35,26 @@ public class SelectionController extends LabeledFieldController {
     /**
      * Constructs a selection field
      *
-     * @param ctx                   the Android context
-     * @param name                  the name of the field
-     * @param labelText             the label to display beside the field. Set to {@code null} to not show a label.
-     * @param validators            contains the validations to process on the field
-     * @param prompt                if nothing is selected, 'prompt' is displayed
-     * @param items                 a list of Strings defining the selection items to show
-     * @param useItemsAsValues      if true, {@code SelectionController} expects the associated form model to use
-     *                              the same string of the selected item when getting or setting the field; otherwise,
-     *                              {@code SelectionController} expects the form model to use index (as an Integer) to
-     *                              represent the selected item
+     * @param ctx              the Android context
+     * @param fieldIdentifier  the fieldIdentifier of the field
+     * @param labelText        the label to display beside the field. Set to {@code null} to not show a label.
+     * @param validators       contains the validations to process on the field
+     * @param prompt           if nothing is selected, 'prompt' is displayed
+     * @param items            a list of Strings defining the selection items to show
+     * @param useItemsAsValues if true, {@code SelectionController} expects the associated form model to use
+     *                         the same string of the selected item when getting or setting the field; otherwise,
+     *                         {@code SelectionController} expects the form model to use index (as an Integer) to
+     *                         represent the selected item
      */
-    public SelectionController(Context ctx, String name, String labelText, Set<InputValidator> validators, String prompt, List<String> items, boolean useItemsAsValues) {
-        this(ctx, name, labelText, validators, prompt, items, useItemsAsValues ? items : null);
+    public SelectionController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators, String prompt, List<String> items, boolean useItemsAsValues) {
+        this(ctx, fieldIdentifier, labelText, validators, prompt, items, useItemsAsValues ? items : null);
     }
 
     /**
      * Constructs a selection field
      *
      * @param ctx                   the Android context
-     * @param name                  the name of the field
+     * @param fieldIdentifier                  the fieldIdentifier of the field
      * @param labelText             the label to display beside the field
      * @param validators            contains the validations to process on the field
      * @param prompt                if nothing is selected, 'prompt' is displayed
@@ -62,8 +62,8 @@ public class SelectionController extends LabeledFieldController {
      * @param values                a list of Objects representing the values to set the form model on a selection (in
      *                              the same order as the {@code items}.
      */
-    public SelectionController(Context ctx, String name, String labelText, Set<InputValidator> validators, String prompt, List<String> items, List<?> values) {
-        super(ctx, name, labelText, validators);
+    public SelectionController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators, String prompt, List<String> items, List<?> values) {
+        super(ctx, fieldIdentifier, labelText, validators);
         this.prompt = prompt;
         this.items = new ArrayList<>(items);
         this.items.add(prompt);     // last item is used for the 'prompt' by the SpinnerView
@@ -74,7 +74,7 @@ public class SelectionController extends LabeledFieldController {
      * Constructs a selection field
      *
      * @param ctx                   the Android context
-     * @param name                  the name of the field
+     * @param fieldIdentifier                  the fieldIdentifier of the field
      * @param labelText             the label to display beside the field. Set to {@code null} to not show a label.
      * @param isRequired            indicates if the field is required or not
      * @param prompt                if nothing is selected, 'prompt' is displayed
@@ -84,15 +84,15 @@ public class SelectionController extends LabeledFieldController {
      *                              {@code SelectionController} expects the form model to use index (as an Integer) to
      *                              represent the selected item
      */
-    public SelectionController(Context ctx, String name, String labelText, boolean isRequired, String prompt, List<String> items, boolean useItemsAsValues) {
-        this(ctx, name, labelText, isRequired, prompt, items, useItemsAsValues ? items : null);
+    public SelectionController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired, String prompt, List<String> items, boolean useItemsAsValues) {
+        this(ctx, fieldIdentifier, labelText, isRequired, prompt, items, useItemsAsValues ? items : null);
     }
 
     /**
      * Constructs a selection field
      *
      * @param ctx                   the Android context
-     * @param name                  the name of the field
+     * @param fieldIdentifier                  the fieldIdentifier of the field
      * @param labelText             the label to display beside the field
      * @param isRequired            indicates if the field is required or not
      * @param prompt                if nothing is selected, 'prompt' is displayed
@@ -100,8 +100,8 @@ public class SelectionController extends LabeledFieldController {
      * @param values                a list of Objects representing the values to set the form model on a selection (in
      *                              the same order as the {@code items}.
      */
-    public SelectionController(Context ctx, String name, String labelText, boolean isRequired, String prompt, List<String> items, List<?> values) {
-        super(ctx, name, labelText, isRequired);
+    public SelectionController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired, String prompt, List<String> items, List<?> values) {
+        super(ctx, fieldIdentifier, labelText, isRequired);
         this.prompt = prompt;
         this.items = new ArrayList<>(items);
         this.items.add(prompt);     // last item is used for the 'prompt' by the SpinnerView
@@ -128,7 +128,7 @@ public class SelectionController extends LabeledFieldController {
             public View getView(int position, View convertView, @NonNull ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
                 if (position == getCount()) {
-                    TextView itemView = ((TextView)view.findViewById(android.R.id.text1));
+                    TextView itemView = view.findViewById(android.R.id.text1);
                     itemView.setText("");
                     itemView.setHint(getItem(getCount()));
                 }
@@ -161,7 +161,7 @@ public class SelectionController extends LabeledFieldController {
                     }
                 }
 
-                getModel().setValue(getName(), value);
+                getModel().setValue(getFieldIdentifier(), value);
             }
 
             @Override
@@ -175,11 +175,11 @@ public class SelectionController extends LabeledFieldController {
     }
 
     private void refresh(Spinner spinner) {
-        Object value = getModel().getValue(getName());
-        int selectionIndex = items.size()-1;    // index of last item shows the 'prompt'
+        Object value = getModel().getValue(getFieldIdentifier());
+        int selectionIndex = items.size() - 1;    // index of last item shows the 'prompt'
 
         if (values != null) {
-            for (int i=0; i< values.size(); i++) {
+            for (int i = 0; i < values.size(); i++) {
                 if (values.get(i).equals(value)) {
                     selectionIndex = i;
                     break;

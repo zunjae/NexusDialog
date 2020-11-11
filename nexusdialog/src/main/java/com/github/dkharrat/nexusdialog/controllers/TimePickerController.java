@@ -28,15 +28,15 @@ public class TimePickerController extends LabeledFieldController {
     /**
      * Constructs a new instance of a time picker field.
      *
-     * @param ctx               the Android context
-     * @param name              the name of the field
-     * @param labelText         the label to display beside the field. Set to {@code null} to not show a label.
-     * @param validators        contains the validations to process on the field
-     * @param displayFormat     the format of the time to show in the text box when a time is set
-     * @param is24HourView      the format of time picker dialog should be 24 hour format or not
+     * @param ctx             the Android context
+     * @param fieldIdentifier the fieldIdentifier of the field
+     * @param labelText       the label to display beside the field. Set to {@code null} to not show a label.
+     * @param validators      contains the validations to process on the field
+     * @param displayFormat   the format of the time to show in the text box when a time is set
+     * @param is24HourView    the format of time picker dialog should be 24 hour format or not
      */
-    public TimePickerController(Context ctx, String name, String labelText,  Set<InputValidator> validators, SimpleDateFormat displayFormat, boolean is24HourView) {
-        super(ctx, name, labelText, validators);
+    public TimePickerController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators, SimpleDateFormat displayFormat, boolean is24HourView) {
+        super(ctx, fieldIdentifier, labelText, validators);
         this.displayFormat = displayFormat;
         this.timeZone = displayFormat.getTimeZone();
         this.is24HourView = is24HourView;
@@ -47,14 +47,14 @@ public class TimePickerController extends LabeledFieldController {
      * Constructs a new instance of a time picker field.
      *
      * @param ctx               the Android context
-     * @param name              the name of the field
+     * @param fieldIdentifier              the fieldIdentifier of the field
      * @param labelText         the label to display beside the field. Set to {@code null} to not show a label.
      * @param isRequired        indicates if the field is required or not
      * @param displayFormat     the format of the time to show in the text box when a time is set
      * @param is24HourView      the format of time picker dialog should be 24 hour format or not
      */
-    public TimePickerController(Context ctx, String name, String labelText, boolean isRequired, SimpleDateFormat displayFormat, boolean is24HourView) {
-        super(ctx, name, labelText, isRequired);
+    public TimePickerController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired, SimpleDateFormat displayFormat, boolean is24HourView) {
+        super(ctx, fieldIdentifier, labelText, isRequired);
         this.displayFormat = displayFormat;
         this.timeZone = displayFormat.getTimeZone();
         this.is24HourView = is24HourView;
@@ -63,11 +63,11 @@ public class TimePickerController extends LabeledFieldController {
     /**
      * Constructs a new instance of a time picker field, with the selected time displayed in "HH:mm" format.
      *
-     * @param name              the name of the field
+     * @param fieldIdentifier              the fieldIdentifier of the field
      * @param labelText         the label to display beside the field
      */
-    public TimePickerController(Context context, String name, String labelText) {
-        this(context, name, labelText, false, new SimpleDateFormat("hh:mm a", Locale.getDefault()), false);
+    public TimePickerController(Context context, String fieldIdentifier, String labelText) {
+        this(context, fieldIdentifier, labelText, false, new SimpleDateFormat("hh:mm a", Locale.getDefault()), false);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class TimePickerController extends LabeledFieldController {
     private void showTimePickerDialog(Context context, final EditText editText) {
         // don't show dialog again if it's already being shown
         if (timePickerDialog == null) {
-            Date date = (Date)getModel().getValue(getName());
+            Date date = (Date)getModel().getValue(getFieldIdentifier());
             if (date == null) {
                 date = new Date();
             }
@@ -116,7 +116,7 @@ public class TimePickerController extends LabeledFieldController {
                     calendar.setTimeZone(timeZone);
                     calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     calendar.set(Calendar.MINUTE, minute);
-                    getModel().setValue(getName(), calendar.getTime());
+                    getModel().setValue(getFieldIdentifier(), calendar.getTime());
                     editText.setText(displayFormat.format(calendar.getTime()));
                 }
             }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), is24HourView);
@@ -137,7 +137,7 @@ public class TimePickerController extends LabeledFieldController {
     }
 
     private void refresh(EditText editText) {
-        Date value = (Date)getModel().getValue(getName());
+        Date value = (Date)getModel().getValue(getFieldIdentifier());
         editText.setText(value != null ? displayFormat.format(value) : "");
     }
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+
 import com.github.dkharrat.nexusdialog.R;
 
 /**
@@ -17,12 +18,12 @@ public class ValueController extends LabeledFieldController {
     /**
      * Constructs a new instance of a value field.
      *
-     * @param ctx               the Android context
-     * @param name              the name of the field
-     * @param labelText         the label to display beside the field. Set to {@code null} to not show a label.
+     * @param ctx             the Android context
+     * @param fieldIdentifier the fieldIdentifier of the field
+     * @param labelText       the label to display beside the field. Set to {@code null} to not show a label.
      */
-    public ValueController(Context ctx, String name, String labelText) {
-        super(ctx, name, labelText, false);
+    public ValueController(Context ctx, String fieldIdentifier, String labelText) {
+        super(ctx, fieldIdentifier, labelText, false);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class ValueController extends LabeledFieldController {
     }
 
     private void refresh(TextView textView) {
-        Object value = getModel().getValue(getName());
+        Object value = getModel().getValue(getFieldIdentifier());
         textView.setText(value != null ? value.toString() : "");
     }
 

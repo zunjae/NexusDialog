@@ -52,15 +52,15 @@ public class SearchableSelectionController extends LabeledFieldController {
     /**
      * Creates a new instance of a selection field.
      *
-     * @param ctx         the Android context
-     * @param name        the name of the field
-     * @param labelText   the label to display beside the field. Set to {@code null} to not show a label.
-     * @param isRequired  indicates if the field is required or not
-     * @param placeholder a placeholder text to show when the input field is empty
-     * @param dataSource  the data source that provides the list of items to display
+     * @param ctx             the Android context
+     * @param fieldIdentifier the fieldIdentifier of the field
+     * @param labelText       the label to display beside the field. Set to {@code null} to not show a label.
+     * @param isRequired      indicates if the field is required or not
+     * @param placeholder     a placeholder text to show when the input field is empty
+     * @param dataSource      the data source that provides the list of items to display
      */
-    public SearchableSelectionController(Context ctx, String name, String labelText, boolean isRequired, String placeholder, SelectionDataSource dataSource) {
-        super(ctx, name, labelText, isRequired);
+    public SearchableSelectionController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired, String placeholder, SelectionDataSource dataSource) {
+        super(ctx, fieldIdentifier, labelText, isRequired);
         this.placeholder = placeholder;
         this.dataSource = dataSource;
 
@@ -71,15 +71,15 @@ public class SearchableSelectionController extends LabeledFieldController {
     /**
      * Creates a new instance of a selection field.
      *
-     * @param ctx         the Android context
-     * @param name        the name of the field
-     * @param labelText   the label to display beside the field. Set to {@code null} to not show a label.
-     * @param validators  contains the validations to process on the field
-     * @param placeholder a placeholder text to show when the input field is empty
-     * @param dataSource  the data source that provides the list of items to display
+     * @param ctx             the Android context
+     * @param fieldIdentifier the fieldIdentifier of the field
+     * @param labelText       the label to display beside the field. Set to {@code null} to not show a label.
+     * @param validators      contains the validations to process on the field
+     * @param placeholder     a placeholder text to show when the input field is empty
+     * @param dataSource      the data source that provides the list of items to display
      */
-    public SearchableSelectionController(Context ctx, String name, String labelText, Set<InputValidator> validators, String placeholder, SelectionDataSource dataSource) {
-        super(ctx, name, labelText, validators);
+    public SearchableSelectionController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators, String placeholder, SelectionDataSource dataSource) {
+        super(ctx, fieldIdentifier, labelText, validators);
         this.placeholder = placeholder;
         this.dataSource = dataSource;
 
@@ -103,7 +103,7 @@ public class SearchableSelectionController extends LabeledFieldController {
             final List<String> filteredItems = new ArrayList<String>(items);
             final ArrayAdapter<String> itemsAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, android.R.id.text1, filteredItems);
 
-            final EditText searchField = (EditText) rootView.findViewById(R.id.search_field);
+            final EditText searchField = rootView.findViewById(R.id.search_field);
             searchField.addTextChangedListener(new TextWatcher() {
 
                 @Override
@@ -141,7 +141,7 @@ public class SearchableSelectionController extends LabeledFieldController {
                 }
             });
 
-            final ListView listView = (ListView) rootView.findViewById(R.id.selection_list);
+            final ListView listView = rootView.findViewById(R.id.selection_list);
             listView.setAdapter(itemsAdapter);
             listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -153,7 +153,7 @@ public class SearchableSelectionController extends LabeledFieldController {
                     } else {
                         selection = itemsAdapter.getItem(position);
                     }
-                    getModel().setValue(getName(), selection);
+                    getModel().setValue(getFieldIdentifier(), selection);
                     editText.setText(selection);
                     selectionDialog.dismiss();
                 }
@@ -231,7 +231,7 @@ public class SearchableSelectionController extends LabeledFieldController {
     }
 
     private void refresh(EditText editText) {
-        String value = (String) getModel().getValue(getName());
+        String value = (String) getModel().getValue(getFieldIdentifier());
         editText.setText(value != null ? value : "");
     }
 

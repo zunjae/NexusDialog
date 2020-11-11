@@ -1,20 +1,20 @@
 package com.github.dkharrat.nexusdialog.controllers;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.github.dkharrat.nexusdialog.R;
 import com.github.dkharrat.nexusdialog.FormElementController;
+import com.github.dkharrat.nexusdialog.R;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * Represents a section in a form. A form section represents a grouping of {@code FormElementController}s that are
@@ -28,14 +28,14 @@ public class FormSectionController extends FormElementController {
     private final List<FormElementController> orderedElements = new ArrayList<FormElementController>();
 
     /**
-     * Creates a new instance of a form section with a specified name and title.
+     * Creates a new instance of a form section with a specified fieldIdentifier and title.
      *
-     * @param ctx   the Android context
-     * @param name  the name of the section
-     * @param title the title of the section to display
+     * @param ctx             the Android context
+     * @param fieldIdentifier the fieldIdentifier of the section
+     * @param title           the title of the section to display
      */
-    public FormSectionController(Context ctx, String name, String title) {
-        super(ctx, name);
+    public FormSectionController(Context ctx, String fieldIdentifier, String title) {
+        super(ctx, fieldIdentifier);
         this.title = title;
     }
 
@@ -77,10 +77,10 @@ public class FormSectionController extends FormElementController {
             throw new IllegalArgumentException("Sub-sections are not supported");
         }
 
-        if (elements.containsKey(element.getName())) {
+        if (elements.containsKey(element.getFieldIdentifier())) {
             throw new IllegalArgumentException("Element with that name already exists");
         } else {
-            elements.put(element.getName(), element);
+            elements.put(element.getFieldIdentifier(), element);
             orderedElements.add(position, element);
             return element;
         }
@@ -127,7 +127,7 @@ public class FormSectionController extends FormElementController {
      * @return          the removed form element instance, or null of no such element was found.
      */
     public FormElementController removeElement(FormElementController element) {
-        return removeElement(element.getName());
+        return removeElement(element.getFieldIdentifier());
     }
 
     /**
@@ -179,7 +179,7 @@ public class FormSectionController extends FormElementController {
             view.setOnLongClickListener(null);
             view.setLongClickable(false);
 
-            final TextView sectionView = (TextView) view.findViewById(R.id.list_item_section_text);
+            final TextView sectionView = view.findViewById(R.id.list_item_section_text);
             sectionView.setText(title);
         } else {
             view = layoutInflater.inflate(R.layout.separator, null);
