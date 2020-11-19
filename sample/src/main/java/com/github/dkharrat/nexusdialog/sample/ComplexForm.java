@@ -66,7 +66,8 @@ public class ComplexForm extends FormWithAppCompatActivity {
         customElem.getRemoveButton().setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 if (!addedElements.isEmpty()) {
-                    section.removeElement(addedElements.pop());
+                    section.removeAllElements();
+                    //section.removeElement(addedElements.pop());
                     recreateViews();
                 }
             }

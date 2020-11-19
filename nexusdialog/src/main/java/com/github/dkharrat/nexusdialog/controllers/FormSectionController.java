@@ -112,7 +112,7 @@ public class FormSectionController extends FormElementController {
      * Removes the form element with the specified name from this section.
      *
      * @param name  the name of the form element to remove
-     * @return      the removed form element instance, or null of no such element was found.
+     * @return the removed form element instance, or null of no such element was found.
      */
     public FormElementController removeElement(String name) {
         FormElementController element = elements.remove(name);
@@ -120,11 +120,15 @@ public class FormSectionController extends FormElementController {
         return element;
     }
 
+    public void removeAllElements() {
+        orderedElements.clear();
+    }
+
     /**
      * Removes the specified form element from this section.
      *
-     * @param element   the form element to remove
-     * @return          the removed form element instance, or null of no such element was found.
+     * @param element the form element to remove
+     * @return the removed form element instance, or null of no such element was found.
      */
     public FormElementController removeElement(FormElementController element) {
         return removeElement(element.getFieldIdentifier());
