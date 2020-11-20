@@ -47,7 +47,7 @@ public class ComplexForm extends FormWithAppCompatActivity {
 
     @Override
     public void initForm(final FormController formController) {
-        setTitle("Complex Form");
+        setTitle("Complex Form :)");
 
         final FormSectionController section = new FormSectionController(this, "Personal Info");
         section.addElement(new EditTextController(this, FIRST_NAME, "First name", "Change me", true));
