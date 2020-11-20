@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.FormWithAppCompatActivity;
+import com.github.dkharrat.nexusdialog.controllers.CurrencyController;
 import com.github.dkharrat.nexusdialog.controllers.EditTextController;
 import com.github.dkharrat.nexusdialog.controllers.FormSectionController;
 import com.github.dkharrat.nexusdialog.controllers.SelectionController;
@@ -53,6 +54,7 @@ public class ComplexForm extends FormWithAppCompatActivity {
         section.addElement(new EditTextController(this, LAST_NAME, "Last name"));
         section.addElement(new ValueController(this, FULL_NAME, "Full name"));
         section.addElement(new SelectionController(this, GENDER, "Gender", true, "Select", Arrays.asList("Male", "Female"), true));
+        section.addElement(new CurrencyController(this, "a", "Amount", "$50", " €", true));
 
         CustomElement customElem = new CustomElement(this, CUSTOM_ELEM, "Custom Element");
         customElem.getAddButton().setOnClickListener(new View.OnClickListener() {
@@ -80,8 +82,8 @@ public class ComplexForm extends FormWithAppCompatActivity {
         inputValidators.add(new CustomValidation());
         inputValidators.add(new RequiredFieldValidator());
         validationSection.addElement(new EditTextController(
-            this, EVEN_NUMBER, "enter an even number", "Put a number here",
-            inputValidators, InputType.TYPE_CLASS_NUMBER
+                this, EVEN_NUMBER, "enter an even number", "Put a number here",
+                inputValidators, InputType.TYPE_NUMBER_FLAG_DECIMAL
         ));
 
         formController.addSection(section);
