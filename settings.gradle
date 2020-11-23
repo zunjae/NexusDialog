@@ -1,1 +1,2 @@
+include ':currency-edittext'
 include ':nexusdialog', ':sample'
