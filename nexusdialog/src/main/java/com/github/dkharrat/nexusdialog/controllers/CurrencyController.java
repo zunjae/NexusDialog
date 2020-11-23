@@ -7,8 +7,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import com.github.dkharrat.nexusdialog.R;
-
-import me.abhinay.input.CurrencyEditText;
+import com.github.dkharrat.nexusdialog.libs.CurrencyEditText;
 
 public class CurrencyController extends LabeledFieldController {
 
