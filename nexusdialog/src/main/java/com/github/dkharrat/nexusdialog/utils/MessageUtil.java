@@ -1,7 +1,6 @@
 package com.github.dkharrat.nexusdialog.utils;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
@@ -11,19 +10,11 @@ public class MessageUtil {
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);
         alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
-           public void onClick(DialogInterface dialog, int which) {
-               alertDialog.dismiss();
-           }
+            public void onClick(DialogInterface dialog, int which) {
+                alertDialog.dismiss();
+            }
         });
         alertDialog.show();
         return alertDialog;
-    }
-
-    public static ProgressDialog newProgressIndicator(String message, Context context) {
-        ProgressDialog progressDialog = new ProgressDialog(context);
-        progressDialog.setMessage(message);
-        progressDialog.setIndeterminate(true);
-
-        return progressDialog;
     }
 }
