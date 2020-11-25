@@ -98,10 +98,15 @@ public class TimePickerController extends LabeledFieldController {
         return editText;
     }
 
+    @Override
+    protected void onRowClicked() {
+
+    }
+
     private void showTimePickerDialog(Context context, final EditText editText) {
         // don't show dialog again if it's already being shown
         if (timePickerDialog == null) {
-            Date date = (Date)getModel().getValue(getFieldIdentifier());
+            Date date = (Date) getModel().getValue(getFieldIdentifier());
             if (date == null) {
                 date = new Date();
             }

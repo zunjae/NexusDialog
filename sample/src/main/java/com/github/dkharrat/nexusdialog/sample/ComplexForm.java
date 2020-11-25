@@ -83,7 +83,7 @@ public class ComplexForm extends FormWithAppCompatActivity {
         inputValidators.add(new RequiredFieldValidator());
         validationSection.addElement(new EditTextController(
                 this, EVEN_NUMBER, "enter an even number", "Put a number here",
-                inputValidators, InputType.TYPE_NUMBER_FLAG_DECIMAL
+                inputValidators, InputType.TYPE_NUMBER_FLAG_SIGNED
         ));
 
         formController.addSection(section);

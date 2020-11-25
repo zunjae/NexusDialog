@@ -29,14 +29,19 @@ public class ValueController extends LabeledFieldController {
     @Override
     protected View createFieldView() {
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
-        final TextView textView = (TextView)layoutInflater.inflate(R.layout.value_field, null);
+        final TextView textView = (TextView) layoutInflater.inflate(R.layout.value_field, null);
         refresh(textView);
 
         return textView;
     }
 
+    @Override
+    protected void onRowClicked() {
+
+    }
+
     private TextView getTextView() {
-        return (TextView)getView().findViewById(R.id.value_text);
+        return (TextView) getView().findViewById(R.id.value_text);
     }
 
     private void refresh(TextView textView) {

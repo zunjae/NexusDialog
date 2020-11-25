@@ -38,6 +38,11 @@ public class CurrencyController extends LabeledFieldController {
     }
 
     @Override
+    protected void onRowClicked() {
+
+    }
+
+    @Override
     public void refresh() {
         View root = getView();
         CurrencyEditText currencyEditText = root.findViewById(R.id.etInput);

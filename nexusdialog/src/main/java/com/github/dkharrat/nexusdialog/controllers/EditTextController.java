@@ -198,6 +198,10 @@ public class EditTextController extends LabeledFieldController {
         return editText;
     }
 
+    @Override
+    protected void onRowClicked() {
+    }
+
     private void refresh(EditText editText) {
         Object value = getModel().getValue(getFieldIdentifier());
         String valueStr = value != null ? value.toString() : "";

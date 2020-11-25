@@ -53,14 +53,14 @@ public class SelectionController extends LabeledFieldController {
     /**
      * Constructs a selection field
      *
-     * @param ctx                   the Android context
-     * @param fieldIdentifier                  the fieldIdentifier of the field
-     * @param labelText             the label to display beside the field
-     * @param validators            contains the validations to process on the field
-     * @param prompt                if nothing is selected, 'prompt' is displayed
-     * @param items                 a list of Strings defining the selection items to show
-     * @param values                a list of Objects representing the values to set the form model on a selection (in
-     *                              the same order as the {@code items}.
+     * @param ctx             the Android context
+     * @param fieldIdentifier the fieldIdentifier of the field
+     * @param labelText       the label to display beside the field
+     * @param validators      contains the validations to process on the field
+     * @param prompt          if nothing is selected, 'prompt' is displayed
+     * @param items           a list of Strings defining the selection items to show
+     * @param values          a list of Objects representing the values to set the form model on a selection (in
+     *                        the same order as the {@code items}.
      */
     public SelectionController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators, String prompt, List<String> items, List<?> values) {
         super(ctx, fieldIdentifier, labelText, validators);
@@ -73,16 +73,16 @@ public class SelectionController extends LabeledFieldController {
     /**
      * Constructs a selection field
      *
-     * @param ctx                   the Android context
-     * @param fieldIdentifier                  the fieldIdentifier of the field
-     * @param labelText             the label to display beside the field. Set to {@code null} to not show a label.
-     * @param isRequired            indicates if the field is required or not
-     * @param prompt                if nothing is selected, 'prompt' is displayed
-     * @param items                 a list of Strings defining the selection items to show
-     * @param useItemsAsValues      if true, {@code SelectionController} expects the associated form model to use
-     *                              the same string of the selected item when getting or setting the field; otherwise,
-     *                              {@code SelectionController} expects the form model to use index (as an Integer) to
-     *                              represent the selected item
+     * @param ctx              the Android context
+     * @param fieldIdentifier  the fieldIdentifier of the field
+     * @param labelText        the label to display beside the field. Set to {@code null} to not show a label.
+     * @param isRequired       indicates if the field is required or not
+     * @param prompt           if nothing is selected, 'prompt' is displayed
+     * @param items            a list of Strings defining the selection items to show
+     * @param useItemsAsValues if true, {@code SelectionController} expects the associated form model to use
+     *                         the same string of the selected item when getting or setting the field; otherwise,
+     *                         {@code SelectionController} expects the form model to use index (as an Integer) to
+     *                         represent the selected item
      */
     public SelectionController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired, String prompt, List<String> items, boolean useItemsAsValues) {
         this(ctx, fieldIdentifier, labelText, isRequired, prompt, items, useItemsAsValues ? items : null);
@@ -91,14 +91,14 @@ public class SelectionController extends LabeledFieldController {
     /**
      * Constructs a selection field
      *
-     * @param ctx                   the Android context
-     * @param fieldIdentifier                  the fieldIdentifier of the field
-     * @param labelText             the label to display beside the field
-     * @param isRequired            indicates if the field is required or not
-     * @param prompt                if nothing is selected, 'prompt' is displayed
-     * @param items                 a list of Strings defining the selection items to show
-     * @param values                a list of Objects representing the values to set the form model on a selection (in
-     *                              the same order as the {@code items}.
+     * @param ctx             the Android context
+     * @param fieldIdentifier the fieldIdentifier of the field
+     * @param labelText       the label to display beside the field
+     * @param isRequired      indicates if the field is required or not
+     * @param prompt          if nothing is selected, 'prompt' is displayed
+     * @param items           a list of Strings defining the selection items to show
+     * @param values          a list of Objects representing the values to set the form model on a selection (in
+     *                        the same order as the {@code items}.
      */
     public SelectionController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired, String prompt, List<String> items, List<?> values) {
         super(ctx, fieldIdentifier, labelText, isRequired);
@@ -114,7 +114,13 @@ public class SelectionController extends LabeledFieldController {
      * @return the Spinner view associated with this element
      */
     public Spinner getSpinner() {
-        return (Spinner)getView().findViewById(spinnerId);
+        return (Spinner) getView().findViewById(spinnerId);
+    }
+
+
+    @Override
+    protected void onRowClicked() {
+        getSpinner().performClick();
     }
 
     @Override
@@ -138,7 +144,7 @@ public class SelectionController extends LabeledFieldController {
 
             @Override
             public int getCount() {
-                return super.getCount()-1; // don't display last item (it's used for the prompt)
+                return super.getCount() - 1; // don't display last item (it's used for the prompt)
             }
         };
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -154,7 +160,7 @@ public class SelectionController extends LabeledFieldController {
                     value = pos;
                 } else {
                     // last pos indicates nothing is selected
-                    if (pos == items.size()-1) {
+                    if (pos == items.size() - 1) {
                         value = null;
                     } else {    // if something is selected, set the value on the model
                         value = values.get(pos);
@@ -186,7 +192,7 @@ public class SelectionController extends LabeledFieldController {
                 }
             }
         } else if (value instanceof Integer) {
-            selectionIndex = (Integer)value;
+            selectionIndex = (Integer) value;
         }
 
         spinner.setSelection(selectionIndex);

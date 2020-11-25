@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+
 import com.github.dkharrat.nexusdialog.controllers.LabeledFieldController;
 
 public class CustomElement extends LabeledFieldController {
@@ -18,12 +19,17 @@ public class CustomElement extends LabeledFieldController {
         return inflater.inflate(R.layout.custom_element, null);
     }
 
+    @Override
+    protected void onRowClicked() {
+
+    }
+
     public Button getAddButton() {
-        return (Button)getView().findViewById(R.id.add_btn);
+        return (Button) getView().findViewById(R.id.add_btn);
     }
 
     public Button getRemoveButton() {
-        return (Button)getView().findViewById(R.id.remove_btn);
+        return (Button) getView().findViewById(R.id.remove_btn);
     }
 
     public void refresh() {

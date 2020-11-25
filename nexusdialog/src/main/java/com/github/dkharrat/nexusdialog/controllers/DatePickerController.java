@@ -102,10 +102,15 @@ public class DatePickerController extends LabeledFieldController {
         return editText;
     }
 
+    @Override
+    protected void onRowClicked() {
+
+    }
+
     private void showDatePickerDialog(final Context context, final EditText editText) {
         // don't show dialog again if it's already being shown
         if (datePickerDialog == null) {
-            Date date = (Date)getModel().getValue(getFieldIdentifier());
+            Date date = (Date) getModel().getValue(getFieldIdentifier());
             if (date == null) {
                 date = new Date();
             }
