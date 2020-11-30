@@ -26,6 +26,6 @@ public class ComplexForm extends FormWithAppCompatActivity {
 
         formController.getModel().setValue("a", "Bob");
         formController.getModel().setValue("b", "5.00");
-        formController.getModel().setValue("c", true);
+        formController.getModel().setValue("c", false);
     }
 }
