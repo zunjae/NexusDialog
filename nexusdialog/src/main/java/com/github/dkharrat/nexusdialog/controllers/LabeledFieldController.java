@@ -137,7 +137,11 @@ public abstract class LabeledFieldController extends FormElementController {
         if (labelText == null) {
             label.setVisibility(View.GONE);
         } else {
-            label.setText(labelText);
+            if (isRequired()) {
+                label.setText(String.format("%s *", labelText));
+            } else {
+                label.setText(labelText);
+            }
         }
 
         root.setOnClickListener(new View.OnClickListener() {
