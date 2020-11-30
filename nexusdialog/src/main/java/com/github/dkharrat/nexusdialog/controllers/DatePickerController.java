@@ -11,13 +11,11 @@ import android.widget.TextView;
 
 import com.github.dkharrat.nexusdialog.R;
 import com.github.dkharrat.nexusdialog.utils.ControllerBuilder;
-import com.github.dkharrat.nexusdialog.validations.InputValidator;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Set;
 import java.util.TimeZone;
 
 /**
@@ -36,41 +34,23 @@ public class DatePickerController extends LabeledFieldController {
     /**
      * Constructs a new instance of a date picker field.
      *
-     * @param ctx             the Android context
-     * @param fieldIdentifier the fieldIdentifier of the field
-     * @param labelText       the label to display beside the field. Set to {@code null} to not show a label.
-     * @param validators      contains the validations to process on the field
-     * @param displayFormat   the format of the date to show in the text box when a date is set
+     * @param ctx           the Android context
+     * @param identifier    the fieldIdentifier of the field
+     * @param labelText     the label to display beside the field. Set to {@code null} to not show a label.
+     * @param isRequired    indicates if the field is required or not
+     * @param displayFormat the format of the date to show in the text box when a date is set
      */
-    public DatePickerController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators, SimpleDateFormat displayFormat) {
-        super(ctx, fieldIdentifier, labelText, validators);
+    public DatePickerController(
+            Context ctx,
+            String identifier,
+            String labelText,
+            boolean isRequired,
+            SimpleDateFormat displayFormat,
+            boolean fieldEnabled
+    ) {
+        super(ctx, identifier, labelText, isRequired, fieldEnabled);
         this.displayFormat = displayFormat;
         this.timeZone = displayFormat.getTimeZone();
-    }
-
-    /**
-     * Constructs a new instance of a date picker field.
-     *
-     * @param ctx             the Android context
-     * @param fieldIdentifier the fieldIdentifier of the field
-     * @param labelText       the label to display beside the field. Set to {@code null} to not show a label.
-     * @param isRequired      indicates if the field is required or not
-     * @param displayFormat   the format of the date to show in the text box when a date is set
-     */
-    public DatePickerController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired, SimpleDateFormat displayFormat) {
-        super(ctx, fieldIdentifier, labelText, isRequired);
-        this.displayFormat = displayFormat;
-        this.timeZone = displayFormat.getTimeZone();
-    }
-
-    /**
-     * Constructs a new instance of a date picker field, with the selected date displayed in "MMM d, yyyy" format.
-     *
-     * @param fieldIdentifier the fieldIdentifier of the field
-     * @param labelText       the label to display beside the field
-     */
-    public DatePickerController(Context context, String fieldIdentifier, String labelText) {
-        this(context, fieldIdentifier, labelText, false, new SimpleDateFormat("MMM d, yyyy", Locale.getDefault()));
     }
 
     @Override

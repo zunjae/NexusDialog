@@ -13,7 +13,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <code>FormController</code> is the main class that manages the form elements of NexusDialog. It provides simple APIs
@@ -27,7 +26,6 @@ public class FormController {
 
     private FormModel model;
     private ValidationErrorDisplay validationErrorDisplay;
-    private static final AtomicInteger nextGeneratedViewId = new AtomicInteger(1);
 
     /**
      * Constructs a new FormController.

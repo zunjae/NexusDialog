@@ -1,29 +1,6 @@
 package com.github.dkharrat.nexusdialog.controllers;
 
-import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-
-import com.github.dkharrat.nexusdialog.validations.InputValidator;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-/**
- * Represents a field that allows a user to select from a list of items.
- * <p/>
- * For the field value, the associated FormModel must return either a String or a 0-based index, representing the
- * currently selected item. Which representation to use is specified by the constructor. In either representation, no
- * selection can be represented by returning {@code null} for the value of the field.
- */
+/*
 public class SelectionController extends LabeledFieldController {
 
     private final int spinnerId = View.generateViewId();
@@ -32,36 +9,10 @@ public class SelectionController extends LabeledFieldController {
     private final List<String> items;
     private final List<?> values;
 
-    /**
-     * Constructs a selection field
-     *
-     * @param ctx              the Android context
-     * @param fieldIdentifier  the fieldIdentifier of the field
-     * @param labelText        the label to display beside the field. Set to {@code null} to not show a label.
-     * @param validators       contains the validations to process on the field
-     * @param prompt           if nothing is selected, 'prompt' is displayed
-     * @param items            a list of Strings defining the selection items to show
-     * @param useItemsAsValues if true, {@code SelectionController} expects the associated form model to use
-     *                         the same string of the selected item when getting or setting the field; otherwise,
-     *                         {@code SelectionController} expects the form model to use index (as an Integer) to
-     *                         represent the selected item
-     */
     public SelectionController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators, String prompt, List<String> items, boolean useItemsAsValues) {
         this(ctx, fieldIdentifier, labelText, validators, prompt, items, useItemsAsValues ? items : null);
     }
 
-    /**
-     * Constructs a selection field
-     *
-     * @param ctx             the Android context
-     * @param fieldIdentifier the fieldIdentifier of the field
-     * @param labelText       the label to display beside the field
-     * @param validators      contains the validations to process on the field
-     * @param prompt          if nothing is selected, 'prompt' is displayed
-     * @param items           a list of Strings defining the selection items to show
-     * @param values          a list of Objects representing the values to set the form model on a selection (in
-     *                        the same order as the {@code items}.
-     */
     public SelectionController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators, String prompt, List<String> items, List<?> values) {
         super(ctx, fieldIdentifier, labelText, validators);
         this.prompt = prompt;
@@ -70,36 +21,10 @@ public class SelectionController extends LabeledFieldController {
         this.values = new ArrayList<>(values);
     }
 
-    /**
-     * Constructs a selection field
-     *
-     * @param ctx              the Android context
-     * @param fieldIdentifier  the fieldIdentifier of the field
-     * @param labelText        the label to display beside the field. Set to {@code null} to not show a label.
-     * @param isRequired       indicates if the field is required or not
-     * @param prompt           if nothing is selected, 'prompt' is displayed
-     * @param items            a list of Strings defining the selection items to show
-     * @param useItemsAsValues if true, {@code SelectionController} expects the associated form model to use
-     *                         the same string of the selected item when getting or setting the field; otherwise,
-     *                         {@code SelectionController} expects the form model to use index (as an Integer) to
-     *                         represent the selected item
-     */
     public SelectionController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired, String prompt, List<String> items, boolean useItemsAsValues) {
         this(ctx, fieldIdentifier, labelText, isRequired, prompt, items, useItemsAsValues ? items : null);
     }
 
-    /**
-     * Constructs a selection field
-     *
-     * @param ctx             the Android context
-     * @param fieldIdentifier the fieldIdentifier of the field
-     * @param labelText       the label to display beside the field
-     * @param isRequired      indicates if the field is required or not
-     * @param prompt          if nothing is selected, 'prompt' is displayed
-     * @param items           a list of Strings defining the selection items to show
-     * @param values          a list of Objects representing the values to set the form model on a selection (in
-     *                        the same order as the {@code items}.
-     */
     public SelectionController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired, String prompt, List<String> items, List<?> values) {
         super(ctx, fieldIdentifier, labelText, isRequired);
         this.prompt = prompt;
@@ -108,15 +33,9 @@ public class SelectionController extends LabeledFieldController {
         this.values = new ArrayList<>(values);
     }
 
-    /**
-     * Returns the Spinner view associated with this element.
-     *
-     * @return the Spinner view associated with this element
-     */
     public Spinner getSpinner() {
         return (Spinner) getView().findViewById(spinnerId);
     }
-
 
     @Override
     protected void onRowClicked() {
@@ -203,3 +122,4 @@ public class SelectionController extends LabeledFieldController {
         refresh(getSpinner());
     }
 }
+*/

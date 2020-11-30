@@ -5,14 +5,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
 
 import java.text.NumberFormat;
 import java.util.Locale;
-
-/**
- * Created by AbhinayMe on 01/01/2019.
- */
 
 public class CurrencyEditText extends AppCompatEditText {
 
@@ -25,6 +22,13 @@ public class CurrencyEditText extends AppCompatEditText {
     private Boolean Spacing = false;
     private Boolean Delimiter = false;
     private Boolean Decimals = true;
+
+    @Nullable
+    private TextUpdatedInterface listener;
+
+    public void setListener(@Nullable TextUpdatedInterface listener) {
+        this.listener = listener;
+    }
 
     public CurrencyEditText(Context context) {
         super(context);
@@ -98,6 +102,10 @@ public class CurrencyEditText extends AppCompatEditText {
                                 editText.setText(formatted);
                             }
                             editText.setSelection(formatted.length());
+
+                            if (listener != null) {
+                                listener.onNewText(formatted);
+                            }
                         } catch (NumberFormatException e) {
 
                         }
@@ -112,40 +120,6 @@ public class CurrencyEditText extends AppCompatEditText {
 
             }
         });
-    }
-
-    /*
-     *
-     */
-    public double getCleanDoubleValue() {
-        double value = 0.0;
-        if (Decimals) {
-            value = Double.parseDouble(editText.getText().toString().trim().replaceAll("[$,]", "").replaceAll(Currency, ""));
-        } else {
-            String cleanString = editText.getText().toString().trim().replaceAll("[$,.]", "").replaceAll(Currency, "").replaceAll("\\s+", "");
-            try {
-                value = Double.parseDouble(cleanString);
-            } catch (NumberFormatException e) {
-
-            }
-        }
-        return value;
-    }
-
-    public int getCleanIntValue() {
-        int value = 0;
-        if (Decimals) {
-            double doubleValue = Double.parseDouble(editText.getText().toString().trim().replaceAll("[$,]", "").replaceAll(Currency, ""));
-            value = (int) Math.round(doubleValue);
-        } else {
-            String cleanString = editText.getText().toString().trim().replaceAll("[$,.]", "").replaceAll(Currency, "").replaceAll("\\s+", "");
-            try {
-                value = Integer.parseInt(cleanString);
-            } catch (NumberFormatException e) {
-
-            }
-        }
-        return value;
     }
 
     public void setDecimals(boolean value) {

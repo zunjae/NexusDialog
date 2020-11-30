@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.examples_list);
 
-        String[] items = {"Simple Example", "Complex Form", "Custom Form", "Fragment Form"};
+        String[] items = {"Complex Form", "Custom Form", "Fragment Form"};
         ListAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -28,18 +28,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent;
                 switch(position) {
                     case 0: {
-                        intent = new Intent(MainActivity.this, SimpleExample.class);
-                        break;
-                    }
-                    case 1: {
                         intent = new Intent(MainActivity.this, ComplexForm.class);
                         break;
                     }
-                    case 2: {
+                    case 1: {
                         intent = new Intent(MainActivity.this, CustomFormActivity.class);
                         break;
                     }
-                    case 3: {
+                    case 2: {
                         intent = new Intent(MainActivity.this, FragmentFormActivity.class);
                         break;
                     }

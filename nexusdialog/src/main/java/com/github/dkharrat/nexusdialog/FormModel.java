@@ -44,18 +44,16 @@ public abstract class FormModel {
     }
 
     /**
-     * Sets a value for the specified field name. A property change notification is fired to registered listeners if
+     * Sets a value for the specified field identifier. A property change notification is fired to registered listeners if
      * the field's value changed.
      *
-     * @param name     the field name to set the value for
-     * @param newValue the value to set
+     * @param identifier the field identifier to set the value for
+     * @param newValue   the value to set
      */
-    public final void setValue(String name, Object newValue) {
-        Object curValue = getBackingValue(name);
-        if (!objectsEqual(curValue, newValue)) {
-            setBackingValue(name, newValue);
-            propertyChangeSupport.firePropertyChange(name, curValue, newValue);
-        }
+    public final void setValue(String identifier, Object newValue) {
+        Object curValue = getBackingValue(identifier);
+        setBackingValue(identifier, newValue);
+        propertyChangeSupport.firePropertyChange(identifier, curValue, newValue);
     }
 
     /**

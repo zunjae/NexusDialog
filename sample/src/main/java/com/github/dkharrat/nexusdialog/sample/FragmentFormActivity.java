@@ -11,12 +11,9 @@ import androidx.fragment.app.FragmentManager;
 
 import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.FormFragment;
-import com.github.dkharrat.nexusdialog.controllers.EditTextController;
 import com.github.dkharrat.nexusdialog.controllers.FormSectionController;
-import com.github.dkharrat.nexusdialog.controllers.SelectionController;
 import com.github.dkharrat.nexusdialog.utils.MessageUtil;
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 public class FragmentFormActivity extends FragmentActivity {
@@ -82,9 +79,9 @@ public class FragmentFormActivity extends FragmentActivity {
         public void initForm(FormController controller) {
             Context ctxt = getContext();
             FormSectionController section = new FormSectionController(ctxt, "Personal Info");
-            section.addElement(new EditTextController(ctxt, FIRST_NAME, "First name"));
-            section.addElement(new EditTextController(ctxt, LAST_NAME, "Last name"));
-            section.addElement(new SelectionController(ctxt, GENDER, "Gender", true, "Select", Arrays.asList("Male", "Female"), true));
+            //section.addElement(new EditTextController(ctxt, FIRST_NAME, "First name"));
+            //section.addElement(new EditTextController(ctxt, LAST_NAME, "Last name"));
+            //section.addElement(new SelectionController(ctxt, GENDER, "Gender", true, "Select", Arrays.asList("Male", "Female"), true));
 
             HashSet<String> checkedBoxes = new HashSet<String>();
             checkedBoxes.add("gaming");

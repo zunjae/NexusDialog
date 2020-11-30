@@ -9,19 +9,19 @@ import com.github.dkharrat.nexusdialog.R;
 
 public class CheckBoxController extends LabeledFieldController {
 
-    private boolean checked;
-
-    public CheckBoxController(Context ctx, String fieldIdentifier, String labelText, boolean checked) {
-        super(ctx, fieldIdentifier, labelText, false);
-        this.checked = checked;
+    public CheckBoxController(
+            Context ctx,
+            String identifier,
+            String labelText,
+            boolean isRequired,
+            boolean fieldEnabled
+    ) {
+        super(ctx, identifier, labelText, isRequired, fieldEnabled);
     }
 
     @Override
     protected View createFieldView() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.value_checkbox, null);
-        CheckBox checkBox = view.findViewById(R.id.checkbox);
-        checkBox.setChecked(checked);
-        return view;
+        return LayoutInflater.from(getContext()).inflate(R.layout.value_checkbox, null);
     }
 
     @Override
@@ -30,6 +30,7 @@ public class CheckBoxController extends LabeledFieldController {
         checkBox.setChecked(!checkBox.isChecked());
     }
 
+    @Override
     public void refresh() {
         boolean value = (boolean) getModel().getValue(getFieldIdentifier());
         CheckBox checkBox = getFieldView().findViewById(R.id.checkbox);

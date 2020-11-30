@@ -1,27 +1,8 @@
 package com.github.dkharrat.nexusdialog.controllers;
 
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
-
-import com.github.dkharrat.nexusdialog.R;
-
-/**
- * Represents a field that displays a value.
- * <p/>
- * For the field value, the associated FormModel can return a string or any object. The value's {@code toString} method
- * will be used to display the value.
- */
+/*
 public class ValueController extends LabeledFieldController {
 
-    /**
-     * Constructs a new instance of a value field.
-     *
-     * @param ctx             the Android context
-     * @param fieldIdentifier the fieldIdentifier of the field
-     * @param labelText       the label to display beside the field. Set to {@code null} to not show a label.
-     */
     public ValueController(Context ctx, String fieldIdentifier, String labelText) {
         super(ctx, fieldIdentifier, labelText, false);
     }
@@ -53,3 +34,4 @@ public class ValueController extends LabeledFieldController {
         refresh(getTextView());
     }
 }
+ */

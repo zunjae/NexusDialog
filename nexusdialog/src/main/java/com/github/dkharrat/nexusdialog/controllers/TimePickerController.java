@@ -8,13 +8,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TimePicker;
 
-import com.github.dkharrat.nexusdialog.validations.InputValidator;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Set;
 import java.util.TimeZone;
 
 public class TimePickerController extends LabeledFieldController {
@@ -23,51 +20,19 @@ public class TimePickerController extends LabeledFieldController {
     private TimePickerDialog timePickerDialog = null;
     private final SimpleDateFormat displayFormat;
     private final TimeZone timeZone;
-    private final boolean is24HourView;
+    private final boolean is24HourView = true;
 
-    /**
-     * Constructs a new instance of a time picker field.
-     *
-     * @param ctx             the Android context
-     * @param fieldIdentifier the fieldIdentifier of the field
-     * @param labelText       the label to display beside the field. Set to {@code null} to not show a label.
-     * @param validators      contains the validations to process on the field
-     * @param displayFormat   the format of the time to show in the text box when a time is set
-     * @param is24HourView    the format of time picker dialog should be 24 hour format or not
-     */
-    public TimePickerController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators, SimpleDateFormat displayFormat, boolean is24HourView) {
-        super(ctx, fieldIdentifier, labelText, validators);
+    public TimePickerController(
+            Context context,
+            String fieldIdentifier,
+            String labelText,
+            boolean isRequired,
+            SimpleDateFormat displayFormat,
+            boolean fieldEnabled
+    ) {
+        super(context, fieldIdentifier, labelText, isRequired, fieldEnabled);
         this.displayFormat = displayFormat;
-        this.timeZone = displayFormat.getTimeZone();
-        this.is24HourView = is24HourView;
-    }
-
-
-    /**
-     * Constructs a new instance of a time picker field.
-     *
-     * @param ctx               the Android context
-     * @param fieldIdentifier              the fieldIdentifier of the field
-     * @param labelText         the label to display beside the field. Set to {@code null} to not show a label.
-     * @param isRequired        indicates if the field is required or not
-     * @param displayFormat     the format of the time to show in the text box when a time is set
-     * @param is24HourView      the format of time picker dialog should be 24 hour format or not
-     */
-    public TimePickerController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired, SimpleDateFormat displayFormat, boolean is24HourView) {
-        super(ctx, fieldIdentifier, labelText, isRequired);
-        this.displayFormat = displayFormat;
-        this.timeZone = displayFormat.getTimeZone();
-        this.is24HourView = is24HourView;
-    }
-
-    /**
-     * Constructs a new instance of a time picker field, with the selected time displayed in "HH:mm" format.
-     *
-     * @param fieldIdentifier              the fieldIdentifier of the field
-     * @param labelText         the label to display beside the field
-     */
-    public TimePickerController(Context context, String fieldIdentifier, String labelText) {
-        this(context, fieldIdentifier, labelText, false, new SimpleDateFormat("hh:mm a", Locale.getDefault()), false);
+        this.timeZone = new SimpleDateFormat("hh:mm a", Locale.getDefault()).getTimeZone();
     }
 
     @Override
@@ -94,6 +59,10 @@ public class TimePickerController extends LabeledFieldController {
                 }
             }
         });
+
+        if (isFieldEnabled()) {
+            editText.setEnabled(false);
+        }
 
         return editText;
     }
@@ -138,11 +107,11 @@ public class TimePickerController extends LabeledFieldController {
     }
 
     private EditText getEditText() {
-        return (EditText)getView().findViewById(editTextId);
+        return (EditText) getView().findViewById(editTextId);
     }
 
     private void refresh(EditText editText) {
-        Date value = (Date)getModel().getValue(getFieldIdentifier());
+        Date value = (Date) getModel().getValue(getFieldIdentifier());
         editText.setText(value != null ? displayFormat.format(value) : "");
     }
 

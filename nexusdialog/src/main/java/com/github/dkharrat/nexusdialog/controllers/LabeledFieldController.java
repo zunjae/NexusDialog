@@ -27,52 +27,30 @@ public abstract class LabeledFieldController extends FormElementController {
     private View fieldView;
     private TextView errorView;
     private Set<InputValidator> validators;
+    private boolean fieldEnabled;
 
-    /**
-     * Creates a labeled field.
-     *
-     * @param ctx             the Android context
-     * @param fieldIdentifier the fieldIdentifier of the field
-     * @param labelText       the label to display beside the field. If null, no label is displayed and the field will
-     *                        occupy the entire length of the row.
-     * @param isRequired      indicates whether this field is required. If true, this field checks for a non-empty or
-     *                        non-null value upon validation. Otherwise, this field can be empty.
-     */
-    public LabeledFieldController(Context ctx, String fieldIdentifier, String labelText, boolean isRequired) {
-        this(ctx, fieldIdentifier, labelText, new HashSet<>());
+    public LabeledFieldController(
+            Context context,
+            String identifier,
+            String labelText,
+            boolean isRequired,
+            boolean fieldEnabled
+    ) {
+        super(context, identifier);
+        this.validators = new HashSet<>();
+        this.labelText = labelText;
+        this.fieldEnabled = fieldEnabled;
         setIsRequired(isRequired);
     }
 
-    /**
-     * Creates a labeled field.
-     *
-     * @param ctx             the Android context
-     * @param fieldIdentifier the fieldIdentifier of the field
-     * @param labelText       the label to display beside the field. If null, no label is displayed and the field will
-     *                        occupy the entire length of the row.
-     * @param validators      The list of input validations to add to the field.
-     */
-    public LabeledFieldController(Context ctx, String fieldIdentifier, String labelText, Set<InputValidator> validators) {
-        super(ctx, fieldIdentifier);
-        this.labelText = labelText;
-        this.validators = validators;
+    public boolean isFieldEnabled() {
+        return fieldEnabled;
     }
 
-    /**
-     * Returns the associated label for this field.
-     *
-     * @return the associated label for this field
-     */
     public String getLabel() {
         return labelText;
     }
 
-    /**
-     * Sets whether this field is required to have user input.
-     *
-     * @param required if true, this field checks for a non-empty or non-null value upon validation. Otherwise, this
-     *                 field can be empty.
-     */
     public void setIsRequired(boolean required) {
         if (!required) {
             validators.remove(REQUIRED_FIELD_VALIDATOR);
@@ -165,7 +143,9 @@ public abstract class LabeledFieldController extends FormElementController {
         root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onRowClicked();
+                if (fieldEnabled) {
+                    onRowClicked();
+                }
             }
         });
 

@@ -7,11 +7,7 @@ import android.view.WindowManager;
 
 import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.MapFormModel;
-import com.github.dkharrat.nexusdialog.controllers.EditTextController;
 import com.github.dkharrat.nexusdialog.controllers.FormSectionController;
-import com.github.dkharrat.nexusdialog.controllers.SelectionController;
-
-import java.util.Arrays;
 
 /**
  * Demonstrates how to implement a custom Activity that uses {@link FormController} directly. Note that, this example does NOT handle
@@ -38,9 +34,9 @@ public class CustomFormActivity extends Activity {
         formController = new FormController(this, new MapFormModel());
 
         FormSectionController section = new FormSectionController(this, "Personal Info");
-        section.addElement(new EditTextController(this, "firstName", "First name"));
-        section.addElement(new EditTextController(this, "lastName", "Last name"));
-        section.addElement(new SelectionController(this, "gender", "Gender", true, "Select", Arrays.asList("Male", "Female"), true));
+        //section.addElement(new EditTextController(this, "firstName", "First name"));
+        //section.addElement(new EditTextController(this, "lastName", "Last name"));
+        //section.addElement(new SelectionController(this, "gender", "Gender", true, "Select", Arrays.asList("Male", "Female"), true));
 
         formController.addSection(section);
 
