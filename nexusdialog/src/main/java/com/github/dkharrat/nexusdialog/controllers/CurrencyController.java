@@ -56,9 +56,10 @@ public class CurrencyController extends LabeledFieldController {
                 getModel().setValue(getFieldIdentifier(), withoutCurrency);
                 // move cursor to end
                 currencyEditText.setSelection(currencyEditText.getText().length());
-
             }
         });
+
+        updateUI(currencyEditText);
 
         return view;
     }
@@ -68,24 +69,30 @@ public class CurrencyController extends LabeledFieldController {
 
     }
 
-    @Override
-    public void refresh() {
-        View root = getFieldView();
-        CurrencyEditText currencyEditText = root.findViewById(R.id.etInput);
+    private void updateUI(CurrencyEditText currencyEditText) {
         String currentText = currencyEditText.getText().toString();
 
         String value = (String) getModel().getValue(getFieldIdentifier());
         if (value == null) {
-            currencyEditText.setText("Dog");
+            currencyEditText.setText("");
             return;
         }
 
         if (currency != null) {
-            if (!currentText.startsWith(currentText)) {
-                currencyEditText.setText(String.format("%s%s", currency, currentText));
+            if (!currentText.startsWith(currency)) {
+                currencyEditText.setText(String.format("%s%s", currency, value));
+            } else {
+                currencyEditText.setText(String.format("%s%s", currency, value));
             }
         } else {
             currencyEditText.setText(value);
         }
+    }
+
+    @Override
+    public void refresh() {
+        View root = getFieldView();
+        CurrencyEditText currencyEditText = root.findViewById(R.id.etInput);
+        updateUI(currencyEditText);
     }
 }
