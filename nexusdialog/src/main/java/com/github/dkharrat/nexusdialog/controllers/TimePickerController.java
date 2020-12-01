@@ -24,13 +24,13 @@ public class TimePickerController extends LabeledFieldController {
 
     public TimePickerController(
             Context context,
-            String fieldIdentifier,
+            String identifier,
             String labelText,
             boolean isRequired,
             SimpleDateFormat displayFormat,
-            boolean fieldEnabled
+            boolean enabled
     ) {
-        super(context, fieldIdentifier, labelText, isRequired, fieldEnabled);
+        super(context, identifier, labelText, isRequired, enabled);
         this.displayFormat = displayFormat;
         this.timeZone = new SimpleDateFormat("hh:mm a", Locale.getDefault()).getTimeZone();
     }
@@ -60,7 +60,7 @@ public class TimePickerController extends LabeledFieldController {
             }
         });
 
-        if (isFieldEnabled()) {
+        if (isEnabled()) {
             editText.setEnabled(false);
         }
 

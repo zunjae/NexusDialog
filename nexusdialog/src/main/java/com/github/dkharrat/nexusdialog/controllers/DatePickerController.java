@@ -30,14 +30,14 @@ public class DatePickerController extends LabeledFieldController {
     }
 
     public DatePickerController(
-            Context ctx,
+            Context context,
             String identifier,
             String labelText,
             boolean isRequired,
             SimpleDateFormat displayFormat,
-            boolean fieldEnabled
+            boolean enabled
     ) {
-        super(ctx, identifier, labelText, isRequired, fieldEnabled);
+        super(context, identifier, labelText, isRequired, enabled);
         this.displayFormat = displayFormat;
         this.timeZone = displayFormat.getTimeZone();
     }

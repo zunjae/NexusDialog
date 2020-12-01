@@ -27,24 +27,24 @@ public abstract class LabeledFieldController extends FormElementController {
     private View fieldView;
     private TextView errorView;
     private Set<InputValidator> validators;
-    private boolean fieldEnabled;
+    private boolean enabled;
 
     public LabeledFieldController(
             Context context,
             String identifier,
             String labelText,
             boolean isRequired,
-            boolean fieldEnabled
+            boolean enabled
     ) {
         super(context, identifier);
         this.validators = new HashSet<>();
         this.labelText = labelText;
-        this.fieldEnabled = fieldEnabled;
+        this.enabled = enabled;
         setIsRequired(isRequired);
     }
 
-    public boolean isFieldEnabled() {
-        return fieldEnabled;
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public String getLabel() {
@@ -147,7 +147,7 @@ public abstract class LabeledFieldController extends FormElementController {
         root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (fieldEnabled) {
+                if (enabled) {
                     onRowClicked();
                 }
             }

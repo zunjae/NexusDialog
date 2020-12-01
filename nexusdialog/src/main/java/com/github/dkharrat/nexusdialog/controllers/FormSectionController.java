@@ -24,18 +24,11 @@ import java.util.UUID;
 public class FormSectionController extends FormElementController {
 
     private final String title;
-    private final Map<String,FormElementController> elements = new HashMap<String,FormElementController>();
+    private final Map<String, FormElementController> elements = new HashMap<String, FormElementController>();
     private final List<FormElementController> orderedElements = new ArrayList<FormElementController>();
 
-    /**
-     * Creates a new instance of a form section with a specified fieldIdentifier and title.
-     *
-     * @param ctx             the Android context
-     * @param fieldIdentifier the fieldIdentifier of the section
-     * @param title           the title of the section to display
-     */
-    public FormSectionController(Context ctx, String fieldIdentifier, String title) {
-        super(ctx, fieldIdentifier);
+    public FormSectionController(Context context, String identifier, String title) {
+        super(context, identifier);
         this.title = title;
     }
 

@@ -11,13 +11,13 @@ import com.github.dkharrat.nexusdialog.R;
 public class CheckBoxController extends LabeledFieldController {
 
     public CheckBoxController(
-            Context ctx,
+            Context context,
             String identifier,
             String labelText,
             boolean isRequired,
-            boolean fieldEnabled
+            boolean enabled
     ) {
-        super(ctx, identifier, labelText, isRequired, fieldEnabled);
+        super(context, identifier, labelText, isRequired, enabled);
     }
 
     private void updateElement(CheckBox checkBox) {

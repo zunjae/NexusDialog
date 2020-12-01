@@ -17,7 +17,7 @@ public class CurrencyController extends LabeledFieldController {
     private String placeholder;
 
     public CurrencyController(
-            Context ctx,
+            Context context,
             String identifier,
             String labelText,
             String placeholder,
@@ -26,7 +26,7 @@ public class CurrencyController extends LabeledFieldController {
             boolean enabled
 
     ) {
-        super(ctx, identifier, labelText, isRequired, enabled);
+        super(context, identifier, labelText, isRequired, enabled);
         this.placeholder = placeholder;
         this.currency = currency;
     }
@@ -37,7 +37,7 @@ public class CurrencyController extends LabeledFieldController {
         View view = inflater.inflate(R.layout.form_currency, null);
 
         CurrencyEditText currencyEditText = view.findViewById(R.id.etInput);
-        currencyEditText.setEnabled(isFieldEnabled());
+        currencyEditText.setEnabled(isEnabled());
 
         if (currency != null) {
             currencyEditText.setCurrency(currency);

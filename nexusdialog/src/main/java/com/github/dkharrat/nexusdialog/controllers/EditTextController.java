@@ -17,15 +17,15 @@ public class EditTextController extends LabeledFieldController {
     private final String placeholder;
 
     public EditTextController(
-            Context ctx,
+            Context context,
             String identifier,
             String labelText,
             String placeholder,
             boolean isRequired,
             int inputType,
-            boolean fieldEnabled
+            boolean enabled
     ) {
-        super(ctx, identifier, labelText, isRequired, fieldEnabled);
+        super(context, identifier, labelText, isRequired, enabled);
         this.placeholder = placeholder;
         this.inputType = inputType;
     }
@@ -90,7 +90,7 @@ public class EditTextController extends LabeledFieldController {
     protected View createFieldView() {
         final EditText editText = new EditText(getContext());
         editText.setId(editTextId);
-        editText.setEnabled(isFieldEnabled());
+        editText.setEnabled(isEnabled());
 
         editText.setSingleLine(!isMultiLine());
         if (placeholder != null) {
