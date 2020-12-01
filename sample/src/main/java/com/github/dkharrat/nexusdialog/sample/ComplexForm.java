@@ -6,8 +6,11 @@ import com.github.dkharrat.nexusdialog.FormController;
 import com.github.dkharrat.nexusdialog.FormWithAppCompatActivity;
 import com.github.dkharrat.nexusdialog.controllers.CheckBoxController;
 import com.github.dkharrat.nexusdialog.controllers.CurrencyController;
+import com.github.dkharrat.nexusdialog.controllers.DatePickerController;
 import com.github.dkharrat.nexusdialog.controllers.EditTextController;
 import com.github.dkharrat.nexusdialog.controllers.FormSectionController;
+
+import java.util.Date;
 
 public class ComplexForm extends FormWithAppCompatActivity {
 
@@ -24,8 +27,11 @@ public class ComplexForm extends FormWithAppCompatActivity {
         section.addElement(new CheckBoxController(this, "c", "Chub?", true, true));
         formController.addSection(section);
 
+        section.addElement(new DatePickerController(this, "d", "Pick a date", true, DatePickerController.getDefaultFormatter(), true));
+
         formController.getModel().setValue("a", "Bob");
         formController.getModel().setValue("b", "5.00");
         formController.getModel().setValue("c", false);
+        formController.getModel().setValue("d", new Date());
     }
 }

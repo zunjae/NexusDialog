@@ -18,12 +18,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-/**
- * Represents a field that allows selecting a specific date via a date picker.
- * <p/>
- * For the field value, the associated FormModel must return a {@link Date} instance. No selected date can be
- * represented by returning {@code null} for the value of the field.
- */
 public class DatePickerController extends LabeledFieldController {
     private final int editTextId = View.generateViewId();
 
@@ -31,15 +25,10 @@ public class DatePickerController extends LabeledFieldController {
     private final SimpleDateFormat displayFormat;
     private final TimeZone timeZone;
 
-    /**
-     * Constructs a new instance of a date picker field.
-     *
-     * @param ctx           the Android context
-     * @param identifier    the fieldIdentifier of the field
-     * @param labelText     the label to display beside the field. Set to {@code null} to not show a label.
-     * @param isRequired    indicates if the field is required or not
-     * @param displayFormat the format of the date to show in the text box when a date is set
-     */
+    public static SimpleDateFormat getDefaultFormatter() {
+        return new SimpleDateFormat("yyyy-MM-dd");
+    }
+
     public DatePickerController(
             Context ctx,
             String identifier,
@@ -55,7 +44,14 @@ public class DatePickerController extends LabeledFieldController {
 
     @Override
     protected View createFieldView() {
-        return ControllerBuilder.createBasicRow(getContext());
+        View row = ControllerBuilder.createBasicRow(getContext());
+        updateUI(row.findViewById(R.id.value));
+        return row;
+    }
+
+    private void updateUI(TextView textView) {
+        Date value = (Date) getModel().getValue(getFieldIdentifier());
+        textView.setText(value != null ? displayFormat.format(value) : "");
     }
 
     @Override
@@ -64,7 +60,6 @@ public class DatePickerController extends LabeledFieldController {
     }
 
     private void showDatePickerDialog() {
-        // don't show dialog again if it's already being shown
         final Context context = getContext();
         if (datePickerDialog == null) {
             Date date = (Date) getModel().getValue(getFieldIdentifier());
@@ -100,9 +95,7 @@ public class DatePickerController extends LabeledFieldController {
 
     @Override
     public void refresh() {
-        Date value = (Date) getModel().getValue(getFieldIdentifier());
         View fieldView = getFieldView();
-        TextView valueTextField = fieldView.findViewById(R.id.value);
-        valueTextField.setText(value != null ? displayFormat.format(value) : "");
+        updateUI(fieldView.findViewById(R.id.value));
     }
 }

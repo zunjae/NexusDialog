@@ -109,6 +109,7 @@ public class EditTextController extends LabeledFieldController {
             @Override
             public void afterTextChanged(Editable editable) {
                 getModel().setValue(getFieldIdentifier(), editText.getText().toString());
+                editText.setSelection(editText.getText().length());
             }
         });
 
