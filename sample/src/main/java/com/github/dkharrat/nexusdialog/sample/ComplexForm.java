@@ -19,7 +19,7 @@ public class ComplexForm extends FormWithAppCompatActivity {
         setTitle("Form");
 
         final FormSectionController section = new FormSectionController(this, "Personal Info");
-        section.addElement(new EditTextController(this, "a", "First name", "Change me", true, InputType.TYPE_CLASS_TEXT, true));
+        section.addElement(new EditTextController(this, "a", "First name jdeiw dewij deiwjdwed", "Change me", true, InputType.TYPE_CLASS_TEXT, true));
 
         CurrencyController currencyController = new CurrencyController(this, "b", "Amount", "€50", "€", true, true);
         section.addElement(currencyController);
