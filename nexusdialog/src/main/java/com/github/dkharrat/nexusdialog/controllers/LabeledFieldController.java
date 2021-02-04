@@ -43,6 +43,10 @@ public abstract class LabeledFieldController extends FormElementController {
         setIsRequired(isRequired);
     }
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public boolean isEnabled() {
         return enabled;
     }
