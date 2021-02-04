@@ -23,6 +23,7 @@ public class ComplexForm extends FormWithAppCompatActivity {
 
         CurrencyController currencyController = new CurrencyController(this, "b", "Amount", "€50", "€", true, true);
         section.addElement(currencyController);
+        currencyController.setEnabled(true);
 
         section.addElement(new CheckBoxController(this, "c", "Chub?", true, true));
         formController.addSection(section);
