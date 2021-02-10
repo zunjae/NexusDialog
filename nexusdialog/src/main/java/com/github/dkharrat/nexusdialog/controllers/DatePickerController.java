@@ -19,9 +19,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class DatePickerController extends LabeledFieldController {
-    private final int editTextId = View.generateViewId();
-
-    private DatePickerDialog datePickerDialog = null;
     private final SimpleDateFormat displayFormat;
     private final TimeZone timeZone;
 
@@ -61,36 +58,25 @@ public class DatePickerController extends LabeledFieldController {
 
     private void showDatePickerDialog() {
         final Context context = getContext();
-        if (datePickerDialog == null) {
-            Date date = (Date) getModel().getValue(getFieldIdentifier());
-            if (date == null) {
-                date = new Date();
-            }
-            Calendar calendar = Calendar.getInstance(Locale.getDefault());
-            calendar.setTimeZone(timeZone);
-            calendar.setTime(date);
-
-            datePickerDialog = new DatePickerDialog(context, new OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    Calendar calendar = Calendar.getInstance(Locale.getDefault());
-                    calendar.setTimeZone(timeZone);
-                    calendar.set(year, monthOfYear, dayOfMonth);
-                    getModel().setValue(getFieldIdentifier(), calendar.getTime());
-                    refresh();
-
-                }
-            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-
-            datePickerDialog.setOnDismissListener(new OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-                    datePickerDialog = null;
-                }
-            });
-
-            datePickerDialog.show();
+        Date date = (Date) getModel().getValue(getFieldIdentifier());
+        if (date == null) {
+            date = new Date();
         }
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
+        calendar.setTimeZone(timeZone);
+        calendar.setTime(date);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(context, new OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Calendar calendar = Calendar.getInstance(Locale.getDefault());
+                calendar.setTimeZone(timeZone);
+                calendar.set(year, monthOfYear, dayOfMonth);
+                getModel().setValue(getFieldIdentifier(), calendar.getTime());
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+
+        datePickerDialog.show();
     }
 
     @Override
