@@ -1,6 +1,7 @@
 package com.github.dkharrat.nexusdialog.controllers;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -23,6 +24,7 @@ import java.util.Set;
  */
 public abstract class LabeledFieldController extends FormElementController {
     private static final RequiredFieldValidator REQUIRED_FIELD_VALIDATOR = new RequiredFieldValidator();
+
     private final String labelText;
     private View fieldView;
     private TextView errorView;
@@ -40,7 +42,12 @@ public abstract class LabeledFieldController extends FormElementController {
         this.validators = new HashSet<>();
         this.labelText = labelText;
         this.enabled = enabled;
-        setIsRequired(isRequired);
+
+        if (isRequired) {
+            validators.add(REQUIRED_FIELD_VALIDATOR);
+        } else {
+            validators.remove(REQUIRED_FIELD_VALIDATOR);
+        }
     }
 
     public void setEnabled(boolean enabled) {
@@ -53,14 +60,6 @@ public abstract class LabeledFieldController extends FormElementController {
 
     public String getLabel() {
         return labelText;
-    }
-
-    public void setIsRequired(boolean required) {
-        if (!required) {
-            validators.remove(REQUIRED_FIELD_VALIDATOR);
-        } else if (!isRequired()) {
-            validators.add(REQUIRED_FIELD_VALIDATOR);
-        }
     }
 
     /**
@@ -142,7 +141,8 @@ public abstract class LabeledFieldController extends FormElementController {
             label.setVisibility(View.GONE);
         } else {
             if (isRequired()) {
-                label.setText(String.format("%s *", labelText));
+                String text = String.format("%s <font color='red'>*</font>", labelText);
+                label.setText(Html.fromHtml(text));
             } else {
                 label.setText(labelText);
             }
