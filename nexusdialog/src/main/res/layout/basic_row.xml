@@ -31,6 +31,24 @@
             android:scaleType="fitXY"
             android:src="@drawable/arrow" />
 
+        <LinearLayout
+            android:id="@+id/addContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/add" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
