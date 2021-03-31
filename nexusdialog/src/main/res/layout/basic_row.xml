@@ -34,16 +34,24 @@
         <LinearLayout
             android:id="@+id/addContainer"
             android:layout_width="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:clickable="true"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:focusable="true">
+
+            <View
+                android:layout_width="1dp"
+                android:background="#75000000"
+                android:layout_height="match_parent" />
 
             <ImageView
                 android:id="@+id/add"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/add" />
 

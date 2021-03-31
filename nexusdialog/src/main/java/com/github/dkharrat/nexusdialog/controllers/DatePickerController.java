@@ -3,8 +3,6 @@ package com.github.dkharrat.nexusdialog.controllers;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
