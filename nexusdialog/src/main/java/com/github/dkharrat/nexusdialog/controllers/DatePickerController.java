@@ -39,7 +39,7 @@ public class DatePickerController extends LabeledFieldController {
 
     @Override
     protected View createFieldView() {
-        View row = ControllerBuilder.createBasicRow(getContext());
+        View row = ControllerBuilder.createBasicRow(getContext(), isEnabled());
         updateUI(row.findViewById(R.id.value));
         return row;
     }

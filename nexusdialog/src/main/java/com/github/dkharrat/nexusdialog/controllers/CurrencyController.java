@@ -10,11 +10,11 @@ import com.github.dkharrat.nexusdialog.R;
 import com.github.dkharrat.nexusdialog.libs.CurrencyEditText;
 import com.github.dkharrat.nexusdialog.libs.TextUpdatedInterface;
 
-public class CurrencyController extends LabeledFieldController {
+class CurrencyController extends LabeledFieldController {
 
     @Nullable
-    private String currency;
-    private String placeholder;
+    private final String currency;
+    private final String placeholder;
 
     public CurrencyController(
             Context context,
