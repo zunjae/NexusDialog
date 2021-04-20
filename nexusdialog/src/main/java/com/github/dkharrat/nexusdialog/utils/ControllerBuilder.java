@@ -12,10 +12,7 @@ public class ControllerBuilder {
         View view = LayoutInflater.from(context).inflate(R.layout.basic_row, null);
         View icon = view.findViewById(R.id.icon);
         ViewGroup addContainer = view.findViewById(R.id.addContainer);
-        if (enabledIconControls) {
-            icon.setVisibility(View.VISIBLE);
-            addContainer.setVisibility(View.VISIBLE);
-        } else {
+        if (!enabledIconControls) {
             icon.setVisibility(View.GONE);
             addContainer.setVisibility(View.GONE);
         }
