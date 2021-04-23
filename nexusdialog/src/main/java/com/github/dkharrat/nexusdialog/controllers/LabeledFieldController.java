@@ -43,7 +43,7 @@ public abstract class LabeledFieldController extends FormElementController {
         this.labelText = labelText;
         this.enabled = enabled;
 
-        if (isRequired) {
+        if (isRequired && enabled) {
             validators.add(REQUIRED_FIELD_VALIDATOR);
         } else {
             validators.remove(REQUIRED_FIELD_VALIDATOR);

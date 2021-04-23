@@ -28,7 +28,7 @@ public class ComplexForm extends FormWithAppCompatActivity {
         formController.addSection(section);
 
         section.addElement(new DatePickerController(this, "d", "Pick a date", true, DatePickerController.getDefaultFormatter(), true));
-        section.addElement(new DatePickerController(this, "e", "Pick a date (disabled)", false, DatePickerController.getDefaultFormatter(), false));
+        section.addElement(new DatePickerController(this, "e", "Pick a date (disabled)", true, DatePickerController.getDefaultFormatter(), false));
 
         formController.getModel().setValue("a", "Bob");
         formController.getModel().setValue("b", "5.00");
